@@ -5,12 +5,13 @@ export const metadata = {
 
 
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { SuperAdminHeader } from '@/components/super-admin/super-admin-header'
 import { AdminStats } from '@/components/admin/admin-stats'
 import { AdminComplaintsList } from '@/components/admin/admin-complaints-list'
-import { BroBotChat } from '@/components/brobot/brobot-chat'
 import { MobileBottomNav } from '@/components/shared/mobile-bottom-nav'
+import BroBotChatClient from '@/components/brobot/brobot-chat-client'
 
 export default async function SuperAdminPage() {
   const supabase = await createServerSupabaseClient()
@@ -108,18 +109,24 @@ export default async function SuperAdminPage() {
             </p>
           </div>
 
-          <AdminStats stats={stats} />
+          <Suspense fallback={<div className="animate-pulse h-32 bg-white/5 rounded-lg" />}>
+            <AdminStats stats={stats} />
+          </Suspense>
 
-          <AdminComplaintsList complaints={complaints || []} />
+          <Suspense fallback={<div className="animate-pulse h-64 bg-white/5 rounded-lg mt-8" />}>
+            <AdminComplaintsList complaints={complaints || []} />
+          </Suspense>
         </main>
 
-        <BroBotChat
-          userAvatarUrl={profile?.avatar_url}
-          userRole={profile?.role}
-          userName={profile?.full_name}
-          currentPage="super-admin-dashboard"
-          userStats={stats}
-        />
+        <Suspense fallback={null}>
+          <BroBotChatClient
+            userAvatarUrl={profile?.avatar_url}
+            userRole={profile?.role}
+            userName={profile?.full_name}
+            currentPage="super-admin-dashboard"
+            userStats={stats}
+          />
+        </Suspense>
         <MobileBottomNav role="super_admin" />
       </div>
     </div>

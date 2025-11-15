@@ -74,6 +74,7 @@ export function DashboardHeader({ user, profile }: DashboardHeaderProps) {
                       width={40}
                       height={40}
                       className="rounded-full object-cover"
+                      priority
                     />
                   ) : (
                     <User className="h-5 w-5" />
@@ -91,6 +92,7 @@ export function DashboardHeader({ user, profile }: DashboardHeaderProps) {
                           width={40}
                           height={40}
                           className="object-cover w-full h-full"
+                          priority
                         />
                       ) : (
                         <User className="h-5 w-5 text-blue-400" />

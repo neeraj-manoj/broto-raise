@@ -1,8 +1,17 @@
 import { redirect } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { AdminHeader } from '@/components/admin/admin-header'
-import { AnalyticsDashboard } from '@/components/admin/analytics-dashboard'
 import { MobileBottomNav } from '@/components/shared/mobile-bottom-nav'
+
+// Lazy load AnalyticsDashboard (contains recharts - heavy component)
+const AnalyticsDashboard = dynamic(() => import('@/components/admin/analytics-dashboard').then(mod => ({ default: mod.AnalyticsDashboard })), {
+  loading: () => (
+    <div className="flex items-center justify-center min-h-[400px]">
+      <div className="animate-pulse text-gray-400">Loading analytics...</div>
+    </div>
+  ),
+});
 
 export default async function AnalyticsPage() {
   const supabase = await createServerSupabaseClient()

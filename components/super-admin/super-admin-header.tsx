@@ -111,6 +111,7 @@ export function SuperAdminHeader({ user, profile }: SuperAdminHeaderProps) {
                       width={40}
                       height={40}
                       className="rounded-full object-cover"
+                      priority
                     />
                   ) : (
                     <UserIcon className="h-5 w-5" />
@@ -128,6 +129,7 @@ export function SuperAdminHeader({ user, profile }: SuperAdminHeaderProps) {
                           width={40}
                           height={40}
                           className="object-cover w-full h-full"
+                          priority
                         />
                       ) : (
                         <UserIcon className="h-5 w-5 text-purple-400" />

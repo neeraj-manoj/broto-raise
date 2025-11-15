@@ -32,19 +32,19 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                     FRONTEND LAYER                       │
-│                                                           │
+│                     FRONTEND LAYER                      │
+│                                                         │
 │  Next.js 14 (App Router) + TypeScript + Tailwind CSS    │
-│  • Server Components for optimal performance             │
-│  • Client Components for interactivity                   │
-│  • shadcn/ui for consistent component design             │
+│  • Server Components for optimal performance            │
+│  • Client Components for interactivity                  │
+│  • shadcn/ui for consistent component design            │
 └─────────────────────────────────────────────────────────┘
                            │
                            ▼
 ┌─────────────────────────────────────────────────────────┐
-│                     BACKEND LAYER                        │
-│                                                           │
-│                    Supabase Platform                      │
+│                     BACKEND LAYER                       │
+│                                                         │
+│                    Supabase Platform                    │
 │  ┌─────────────┬──────────────┬─────────────────────┐   │
 │  │   Auth      │   Storage    │   PostgreSQL DB     │   │
 │  │  (Users)    │  (Files)     │  (RLS Policies)     │   │
@@ -53,22 +53,22 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
                            │
                            ▼
 ┌─────────────────────────────────────────────────────────┐
-│                       AI LAYER                           │
-│                                                           │
-│              BroBot (HuggingFace Models)                 │
-│  • Conversational AI for student assistance              │
-│  • Context-aware responses                               │
-│  • Role-specific guidance                                │
+│                       AI LAYER                          │
+│                                                         │
+│              BroBot (HuggingFace Models)                │
+│  • Conversational AI for student assistance             │
+│  • Context-aware responses                              │
+│  • Role-specific guidance                               │
 └─────────────────────────────────────────────────────────┘
                            │
                            ▼
 ┌─────────────────────────────────────────────────────────┐
-│                    DEPLOYMENT                            │
-│                                                           │
-│                      Netlify                             │
-│  • Automatic deployments from git                        │
-│  • Global CDN for fast loading                           │
-│  • Environment variable management                       │
+│                    DEPLOYMENT                           │
+│                                                         │
+│                      Vercel                             │
+│  • Automatic deployments from git                       │
+│  • Global CDN for fast loading                          │
+│  • Environment variable management                      │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -92,11 +92,11 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
 - 💬 Conversational AI (BroBot)
 
 **Deployment:**
-- 🚀 Netlify
+- 🚀 Vercel
 
 ## 🎮 Demo Access
 
-Experience BrotoRaise live: **[Your Netlify URL Here]**
+Experience BrotoRaise live: https://broto-raise.vercel.app/
 
 ### 👥 Demo Credentials
 

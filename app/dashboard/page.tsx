@@ -1,11 +1,12 @@
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { DashboardHeader } from '@/components/dashboard/dashboard-header'
 import { DashboardStats } from '@/components/dashboard/dashboard-stats'
 import { ComplaintsList } from '@/components/dashboard/complaints-list'
-import { BroBotChat } from '@/components/brobot/brobot-chat'
 import { StudentBottomNav } from '@/components/shared/student-bottom-nav'
 import { ScrollToHash } from '@/components/dashboard/scroll-to-hash'
+import BroBotChatClient from '@/components/brobot/brobot-chat-client'
 
 export default async function DashboardPage() {
   const supabase = await createServerSupabaseClient()
@@ -67,18 +68,24 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          <DashboardStats stats={stats} />
+          <Suspense fallback={<div className="animate-pulse h-32 bg-white/5 rounded-lg" />}>
+            <DashboardStats stats={stats} />
+          </Suspense>
 
-          <ComplaintsList complaints={complaints || []} />
+          <Suspense fallback={<div className="animate-pulse h-64 bg-white/5 rounded-lg mt-8" />}>
+            <ComplaintsList complaints={complaints || []} />
+          </Suspense>
         </main>
 
-        <BroBotChat
-          userAvatarUrl={profile?.avatar_url}
-          userRole={profile?.role}
-          userName={profile?.full_name}
-          currentPage="dashboard"
-          userStats={stats}
-        />
+        <Suspense fallback={null}>
+          <BroBotChatClient
+            userAvatarUrl={profile?.avatar_url}
+            userRole={profile?.role}
+            userName={profile?.full_name}
+            currentPage="dashboard"
+            userStats={stats}
+          />
+        </Suspense>
 
         <StudentBottomNav />
       </div>

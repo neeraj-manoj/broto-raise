@@ -9,12 +9,16 @@ const lexend = Lexend({
   weight: ['400', '500', '600', '700'],
   subsets: ["latin"],
   variable: '--font-lexend',
+  display: 'swap',
+  preload: true,
 });
 
 const lexendGiga = Lexend_Giga({
   weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ["latin"],
   variable: '--font-lexend-giga',
+  display: 'swap',
+  preload: true,
 });
 
 export const metadata: Metadata = {
