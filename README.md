@@ -110,29 +110,41 @@ Experience BrotoRaise live: https://broto-raise.vercel.app/
 
 ## 📸 Screenshots
 
+### Landing Page
+![Landing Page 1](./screenshots/desktop/landing_1.png)
+![Landing Page 2](./screenshots/desktop/landing_2.png)
+![Landing Page 3](./screenshots/desktop/landing_3.png)
+
+### Authentication
+![Login](./screenshots/desktop/login.png)
+![Sign Up](./screenshots/desktop/signup.png)
+
 ### Student Dashboard
 Beautiful, intuitive interface for students to raise and track complaints.
-![Student Dashboard](./screenshots/student-dashboard.png)
+![Student Dashboard](./screenshots/desktop/student/dashboard.png)
 
-### Admin Panel
-Powerful tools for admins to manage complaints efficiently.
-![Admin Panel](./screenshots/admin-panel.png)
+### Complaint Management
+![Student Complaints](./screenshots/desktop/student/complaints.png)
+![New Complaint 1](./screenshots/desktop/student/newcomplaint_1.png)
+![New Complaint 2](./screenshots/desktop/student/newcomplaint_2.png)
 
-### Super Admin Dashboard
-Complete system oversight with analytics and admin management.
-![Super Admin Dashboard](./screenshots/super-admin-dashboard.png)
+### Admin Interface
+![Admin Dashboard](./screenshots/desktop/admin/dashboard_stats.png)
+![Admin Complaints](./screenshots/desktop/admin/complaints.png)
+
+### Analytics & Reporting
+![Analytics Overview](./screenshots/desktop/admin/analytics_stats.png)
+![Analytics Details 1](./screenshots/desktop/admin/analytics_1.png)
+![Analytics Details 2](./screenshots/desktop/admin/analytics_2.png)
 
 ### BroBot AI Assistant
-Intelligent chatbot that helps users navigate the platform.
-![BroBot](./screenshots/brobot.png)
-
-### Analytics Dashboard
-Comprehensive insights with interactive charts and filters.
-![Analytics](./screenshots/analytics.png)
+![BroBot Chat](./screenshots/desktop/student/brobot.png)
 
 ### Mobile Experience
 Fully responsive design optimized for mobile devices.
-![Mobile View](./screenshots/mobile-view.png)
+![Mobile Analytics 1](./screenshots/mobile/admin/analytics_1.jpg)
+![Mobile Analytics 2](./screenshots/mobile/admin/analytics_2.jpg)
+![Mobile Complaints](./screenshots/mobile/admin/complaints.jpg)
 
 ## 🚀 API Overview
 
