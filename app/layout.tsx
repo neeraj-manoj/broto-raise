@@ -3,6 +3,7 @@ import { Lexend, Lexend_Giga } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const lexend = Lexend({
   weight: ['400', '500', '600', '700'],
@@ -43,6 +44,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <SpeedInsights />
           <Toaster
             position="top-right"
             duration={2000}
