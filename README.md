@@ -141,10 +141,26 @@ Beautiful, intuitive interface for students to raise and track complaints.
 ![BroBot Chat](./screenshots/desktop/student/brobot.png)
 
 ### Mobile Experience
-Fully responsive design optimized for mobile devices.
-![Mobile Analytics 1](./screenshots/mobile/admin/analytics_1.jpg)
-![Mobile Analytics 2](./screenshots/mobile/admin/analytics_2.jpg)
-![Mobile Complaints](./screenshots/mobile/admin/complaints.jpg)
+Fully responsive design optimized for mobile devices across all user roles.
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1rem 0;">
+  <div>
+    <img src="./screenshots/mobile/student/dashboard_stats.jpg" alt="Student Dashboard" style="width: 100%; border-radius: 8px; border: 1px solid #2d3748;">
+    <p style="text-align: center; margin: 0.5rem 0; font-size: 0.9rem;">Student Dashboard</p>
+  </div>
+  <div>
+    <img src="./screenshots/mobile/student/newcomplaint_1.jpg" alt="New Complaint" style="width: 100%; border-radius: 8px; border: 1px solid #2d3748;">
+    <p style="text-align: center; margin: 0.5rem 0; font-size: 0.9rem;">New Complaint</p>
+  </div>
+  <div>
+    <img src="./screenshots/mobile/admin/analytics_1.jpg" alt="Admin Analytics" style="width: 100%; border-radius: 8px; border: 1px solid #2d3748;">
+    <p style="text-align: center; margin: 0.5rem 0; font-size: 0.9rem;">Admin Analytics</p>
+  </div>
+  <div>
+    <img src="./screenshots/mobile/admin/complaints.jpg" alt="Admin Complaints" style="width: 100%; border-radius: 8px; border: 1px solid #2d3748;">
+    <p style="text-align: center; margin: 0.5rem 0; font-size: 0.9rem;">Admin Complaints</p>
+  </div>
+</div>
 
 ## 🚀 API Overview
 
