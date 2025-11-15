@@ -47,6 +47,14 @@ export function DashboardHeader({ user, profile }: DashboardHeaderProps) {
 
           {/* Actions */}
           <div className="flex items-center gap-2 md:gap-3">
+            {/* New Complaint Button - Desktop Only */}
+            <Link href="/dashboard/new-complaint" className="hidden md:block">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-mono">
+                <Plus className="h-4 w-4 mr-2" />
+                New Complaint
+              </Button>
+            </Link>
+
             {/* Notifications */}
             <NotificationsDropdown userId={user.id} />
 
