@@ -87,7 +87,7 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
         </div>
 
         {/* Filter Grid */}
-        <div className="grid grid-cols-1 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Category Filter */}
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-full bg-white/5 border-white/10 text-white focus:border-blue-500">
