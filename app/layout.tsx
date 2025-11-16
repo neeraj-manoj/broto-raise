@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next"
 
 const lexend = Lexend({
   weight: ['400', '500', '600', '700'],
@@ -49,6 +50,7 @@ export default function RootLayout({
         >
           {children}
           <SpeedInsights />
+          <Analytics />
           <Toaster
             position="top-right"
             duration={2000}
