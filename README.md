@@ -4,7 +4,6 @@
 > **🏆 Competition Entry** • **🌐 Live at [brotoraise.app](https://brotoraise.app)**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-![Build Time](https://img.shields.io/badge/Built%20In-61h%2012m%2046s-0A84FF?style=for-the-badge&labelColor=000000)
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-brotoraise.app-4CAF50?style=flat&logo=vercel&logoColor=white)](https://brotoraise.app)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-Powered-green)](https://supabase.com/)
