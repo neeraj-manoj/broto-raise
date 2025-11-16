@@ -1,16 +1,19 @@
 # 🚀 BrotoRaise - Student Complaint Management System
 
 > **Brototype - Lovable Challenge 2025** 🏆
-> A next-generation complaint management platform built with AI assistance, showcasing the power of vibe-coding and pushing the limits of modern web development.
+> **🏆 Competition Entry** • **🌐 Live at [brotoraise.app](https://brotoraise.app)**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-brotoraise.app-4CAF50?style=flat&logo=vercel&logoColor=white)](https://brotoraise.app)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-Powered-green)](https://supabase.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 
 ## 📖 About The Project
 
-**BrotoRaise** is a comprehensive complaint management system designed for Brocamp's multi-location operations. It enables students to raise complaints, admins to manage and respond to them, and super admins to oversee the entire system across all locations.
+**BrotoRaise** is a comprehensive complaint management system designed for Brocamp's multi-location operations, built as an entry for the Brototype - Lovable Challenge 2025. This production-ready application is now live at [brotoraise.app](https://brotoraise.app), showcasing a complete, scalable solution with custom domain integration.
+
+The platform enables students to raise complaints, admins to manage and respond to them, and super admins to oversee the entire system across all locations, all within a beautifully designed, AI-enhanced interface.
 
 ### 🎯 Built For
 This project was created as part of the **Brototype - Lovable Challenge**, where we pushed the boundaries of what's possible with AI-assisted development. Every feature, from the responsive UI to the intelligent BroBot assistant, showcases the power of modern tooling and AI collaboration.
@@ -96,7 +99,7 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
 
 ## 🎮 Demo Access
 
-Experience BrotoRaise live: https://broto-raise.vercel.app/
+Experience BrotoRaise live: https://brotoraise.app/
 
 ### 👥 Demo Credentials
 
