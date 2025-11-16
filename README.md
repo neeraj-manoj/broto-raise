@@ -101,16 +101,6 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
 
 Experience BrotoRaise live: https://brotoraise.app/
 
-### 👥 Demo Credentials
-
-| Role | Email | Password |
-|------|-------|----------|
-| **Student** | student@demo.com | student123 |
-| **Admin** | admin@demo.com | admin123 |
-| **Super Admin** | superadmin@demo.com | superadmin123 |
-
-> ⚠️ **Note:** This is a demo application. Please don't upload sensitive information.
-
 ## 📸 Screenshots
 
 ### Landing Page
