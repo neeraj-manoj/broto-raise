@@ -97,6 +97,17 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
 **Deployment:**
 - 🚀 Vercel
 
+## 💸 Zero-Cost, Real-World Launch
+
+BrotoRaise was deployed 100% using free developer tools from the GitHub Student Developer Pack:
+
+- Vercel: Blazing-fast hosting with global CDN
+- Custom domain: brotoraise.app (name.com)
+- Supabase: Cloud database, storage, and authentication
+- HuggingFace: AI models powering BroBot chatbot
+  
+No money spent—proving anyone can build scalable SaaS with industry-grade tools at zero cost.
+
 ## 🎮 Demo Access
 
 Experience BrotoRaise live: https://brotoraise.app/
@@ -240,9 +251,7 @@ All tables implement strict RLS policies:
 - Super admins have full system access
 - Responses are restricted to admin roles
 
-
-
-## 🎯 About## Learn More## 🛠️ Development Highlights
+##🛠️ Development Highlights
 
 ### Mobile-First Approach
 - Responsive stat cards with 2x2 grid on mobile
