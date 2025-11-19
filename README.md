@@ -97,7 +97,7 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
 **Deployment:**
 - 🚀 Vercel
 
-## 💸 [Zero-Cost, Real-World Launch](https://github.com/neeraj-manoj/broto-raise/blob/main/README.md#-zero-cost-real-world-launch)
+## 💸 Zero-Cost, Real-World Launch
 
 BrotoRaise was deployed 100% using free developer tools from the [GitHub Student Developer Pack](https://education.github.com/pack):
 
