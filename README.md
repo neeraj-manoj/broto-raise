@@ -97,15 +97,15 @@ This project was created as part of the **Brototype - Lovable Challenge**, where
 **Deployment:**
 - 🚀 Vercel
 
-## 💸 Zero-Cost, Real-World Launch
+## 💸 [Zero-Cost, Real-World Launch](https://github.com/neeraj-manoj/broto-raise/blob/main/README.md#-zero-cost-real-world-launch)
 
-BrotoRaise was deployed 100% using free developer tools from the GitHub Student Developer Pack:
+BrotoRaise was deployed 100% using free developer tools from the [GitHub Student Developer Pack](https://education.github.com/pack):
 
-- Vercel: Blazing-fast hosting with global CDN
-- Custom domain: brotoraise.app (name.com)
-- Supabase: Cloud database, storage, and authentication
-- HuggingFace: AI models powering BroBot chatbot
-  
+- [Vercel](https://vercel.com/): Blazing-fast hosting with global CDN
+- Custom domain: [brotoraise.app](https://brotoraise.app) ([Name.com](https://www.name.com/) from Student Developer Pack)
+- [Supabase](https://supabase.com/): Cloud database, storage, and authentication
+- [HuggingFace](https://huggingface.co/): AI models powering BroBot chatbot
+
 No money spent—proving anyone can build scalable SaaS with industry-grade tools at zero cost.
 
 ## 🎮 Demo Access
