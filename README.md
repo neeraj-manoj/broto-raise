@@ -1,7 +1,7 @@
 # 🚀 BrotoRaise - Student Complaint Management System
 
  **Brototype - Lovable Challenge 2025** • 
- **🏆 Competition Entry** • **🌐 Live at [brotoraise.app](https://brotoraise.app)**
+ **Competition Entry** • **🌐 Live at [brotoraise.app](https://brotoraise.app)**
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-brotoraise.app-4CAF50?style=flat&logo=vercel&logoColor=white)](https://brotoraise.app)
