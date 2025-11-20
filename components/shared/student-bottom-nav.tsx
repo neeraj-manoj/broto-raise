@@ -1,57 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Home, FileText, User, Plus, Settings } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function StudentBottomNav() {
   const pathname = usePathname()
-  const router = useRouter()
-  const [isComplaintsVisible, setIsComplaintsVisible] = useState(false)
-
-  useEffect(() => {
-    if (pathname !== '/dashboard') {
-      setIsComplaintsVisible(false)
-      return
-    }
-
-    const handleScroll = () => {
-      const complaintsSection = document.getElementById('complaints-section')
-      if (complaintsSection) {
-        const rect = complaintsSection.getBoundingClientRect()
-        const windowHeight = window.innerHeight
-
-        // Consider section visible if any part is in viewport
-        const isVisible = rect.top < windowHeight * 0.6 && rect.bottom > windowHeight * 0.3
-        setIsComplaintsVisible(isVisible)
-      }
-    }
-
-    // Check on mount and scroll
-    handleScroll()
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [pathname])
-
-  const handleComplaintsClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-
-    if (pathname === '/dashboard') {
-      // If on dashboard, scroll to complaints section
-      const complaintsSection = document.getElementById('complaints-section')
-      if (complaintsSection) {
-        complaintsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }
-    } else {
-      // Navigate to dashboard with hash
-      router.push('/dashboard#complaints-section')
-    }
-  }
 
   const homeLink = { href: '/dashboard', icon: Home, label: 'Home' }
-  const complaintsLink = { icon: FileText, label: 'Complaints', onClick: handleComplaintsClick }
+  const complaintsLink = { href: '/dashboard/my-complaints', icon: FileText, label: 'Complaints' }
   const profileLink = { href: '/dashboard/profile', icon: User, label: 'Profile' }
   const settingsLink = { href: '/dashboard/settings', icon: Settings, label: 'Settings' }
 
@@ -63,7 +21,7 @@ export function StudentBottomNav() {
           href={homeLink.href}
           className={cn(
             "flex flex-col items-center gap-1 px-2 py-2 rounded-lg transition-all",
-            pathname === homeLink.href && !isComplaintsVisible
+            pathname === homeLink.href
               ? "bg-blue-500/20 text-blue-400"
               : "text-gray-400 hover:text-white hover:bg-white/5"
           )}
@@ -73,18 +31,18 @@ export function StudentBottomNav() {
         </Link>
 
         {/* Complaints */}
-        <button
-          onClick={complaintsLink.onClick}
+        <Link
+          href={complaintsLink.href}
           className={cn(
             "flex flex-col items-center gap-1 px-2 py-2 rounded-lg transition-all",
-            isComplaintsVisible
+            pathname === complaintsLink.href
               ? "bg-blue-500/20 text-blue-400"
               : "text-gray-400 hover:text-white hover:bg-white/5"
           )}
         >
           <complaintsLink.icon className="h-5 w-5" />
           <span className="text-xs font-medium">{complaintsLink.label}</span>
-        </button>
+        </Link>
 
         {/* Center - New Complaint Button (Glowing) */}
         <div className="flex justify-center">

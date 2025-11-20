@@ -42,7 +42,7 @@ export default async function DashboardLayout({
   // The original page fetched stats for BroBot.
   // Let's fetch basic stats here or just pass what we have.
   // BroBotChatClient takes `userStats`.
-  
+
   const { count } = await supabase
     .from('complaints')
     .select('*', { count: 'exact', head: true })

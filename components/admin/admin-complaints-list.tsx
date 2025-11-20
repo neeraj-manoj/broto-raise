@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { formatDistanceToNow } from 'date-fns'
-import { Eye, Filter, Search, UserCheck, Ban, CheckCircle2, Clock } from 'lucide-react'
+import { Eye, Filter, Search, UserCheck, Ban, CheckCircle2, Clock, ThumbsUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -31,6 +31,7 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
   const [categoryFilter, setCategoryFilter] = useState('all')
   const [priorityFilter, setPriorityFilter] = useState('all')
   const [locationFilter, setLocationFilter] = useState('all')
+  const [sortBy, setSortBy] = useState('newest')
   const [locations, setLocations] = useState<any[]>([])
 
   // Fetch all locations from database
@@ -50,8 +51,8 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
     fetchLocations()
   }, [])
 
-  // Filter complaints
-  const filteredComplaints = complaints.filter(complaint => {
+  // Filter and sort complaints
+  const filteredAndSortedComplaints = complaints.filter(complaint => {
     const matchesSearch = complaint.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          complaint.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          complaint.student?.full_name?.toLowerCase().includes(searchQuery.toLowerCase())
@@ -67,6 +68,18 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
     const matchesLocation = locationFilter === 'all' || complaint.location?.id === locationFilter
 
     return matchesSearch && matchesStatus && matchesCategory && matchesPriority && matchesLocation
+  }).sort((a, b) => {
+    if (sortBy === 'newest') {
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    } else if (sortBy === 'oldest') {
+      return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+    } else if (sortBy === 'most_upvoted') {
+      return (b.upvotes_count || 0) - (a.upvotes_count || 0)
+    } else if (sortBy === 'priority') {
+      const priorityOrder = { urgent: 4, high: 3, medium: 2, low: 1 }
+      return (priorityOrder[b.priority as keyof typeof priorityOrder] || 0) - (priorityOrder[a.priority as keyof typeof priorityOrder] || 0)
+    }
+    return 0
   })
 
   return (
@@ -86,8 +99,21 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
           </div>
         </div>
 
-        {/* Filter Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        {/* Sort and Filter Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+          {/* Sort By */}
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-full bg-white/5 border-white/10 text-white focus:border-blue-500">
+              <SelectValue placeholder="Sort By" />
+            </SelectTrigger>
+            <SelectContent className="bg-gray-900 border-white/10">
+              <SelectItem value="newest" className="text-white focus:bg-blue-500/20">Newest First</SelectItem>
+              <SelectItem value="oldest" className="text-white focus:bg-blue-500/20">Oldest First</SelectItem>
+              <SelectItem value="most_upvoted" className="text-white focus:bg-blue-500/20">Most Upvoted</SelectItem>
+              <SelectItem value="priority" className="text-white focus:bg-blue-500/20">Highest Priority</SelectItem>
+            </SelectContent>
+          </Select>
+
           {/* Category Filter */}
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-full bg-white/5 border-white/10 text-white focus:border-blue-500">
@@ -148,7 +174,7 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
       </div>
 
       {/* Complaints List */}
-      {filteredComplaints.length === 0 ? (
+      {filteredAndSortedComplaints.length === 0 ? (
         <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-12 text-center">
           <h3 className="text-xl font-bold text-white mb-2 font-mono">No Complaints Found</h3>
           <p className="text-gray-400">
@@ -160,7 +186,7 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
         </div>
       ) : (
         <div className="space-y-4">
-          {filteredComplaints.map((complaint) => (
+          {filteredAndSortedComplaints.map((complaint) => (
             <AdminComplaintCard key={complaint.id} complaint={complaint} onUpdate={() => router.refresh()} />
           ))}
         </div>
@@ -287,6 +313,12 @@ function AdminComplaintCard({ complaint, onUpdate }: { complaint: any; onUpdate:
               <span className="font-mono">
                 {formatDistanceToNow(new Date(complaint.created_at), { addSuffix: true })}
               </span>
+              {!complaint.is_anonymous && (
+                <span className="flex items-center gap-1 text-blue-400">
+                  <ThumbsUp className="h-4 w-4" />
+                  <span className="font-mono font-bold">{complaint.upvotes_count || 0}</span>
+                </span>
+              )}
             </div>
           </div>
         </div>

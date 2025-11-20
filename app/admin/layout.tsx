@@ -42,7 +42,7 @@ export default async function AdminLayout({
 
   const stats = {
     total: count || 0,
-    // We can't easily get other stats without fetching all complaints, 
+    // We can't easily get other stats without fetching all complaints,
     // but BroBot might not need detailed stats for admin view or we can pass 0.
     // Let's pass basic stats.
     pending: 0,

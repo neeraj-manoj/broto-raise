@@ -52,10 +52,10 @@ export function LoginForm() {
           .single()
 
         toast.success('Login successful!')
-        
+
         // Show redirecting state
         setIsRedirecting(true)
-        
+
         // Redirect based on role
         if (profile?.role === 'super_admin') {
           router.push('/super-admin')

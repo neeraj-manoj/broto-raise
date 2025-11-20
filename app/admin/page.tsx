@@ -21,7 +21,7 @@ export default async function AdminPage() {
     .from('complaints')
     .select('*', { count: 'exact' })
     .order('created_at', { ascending: false })
-  
+
   // Fetch student and location data separately if complaints exist
   if (complaints && complaints.length > 0) {
     // Get unique student IDs and location IDs
