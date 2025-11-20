@@ -246,15 +246,17 @@ export function ProfileForm({ user, profile: initialProfile }: ProfileFormProps)
                 aria-label="Upload avatar"
               />
             </div>
-            <div className="flex-1">
-              <CardTitle className="text-white font-mono">{initialProfile?.full_name || 'User'}</CardTitle>
-              <CardDescription className="text-gray-400 flex items-center gap-2 mt-1">
-                <Mail className="h-4 w-4" />
-                {user?.email}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1">
+                <CardTitle className="text-white font-mono truncate">{initialProfile?.full_name || 'User'}</CardTitle>
+                <div className="shrink-0">
+                  {getRoleBadge(initialProfile?.role)}
+                </div>
+              </div>
+              <CardDescription className="text-gray-400 flex items-center gap-2">
+                <Mail className="h-4 w-4 shrink-0" />
+                <span className="truncate">{user?.email}</span>
               </CardDescription>
-            </div>
-            <div>
-              {getRoleBadge(initialProfile?.role)}
             </div>
           </div>
         </CardHeader>

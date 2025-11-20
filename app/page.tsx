@@ -13,16 +13,16 @@ export default function Home() {
       <nav className="relative z-10 border-b border-white/10 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
           <div className="flex items-center gap-1.5 md:gap-2">
-            <MessageSquareWarning className="h-5 w-5 md:h-7 md:w-7 text-blue-500" />
-            <span className="text-base md:text-2xl font-bold font-mono">
+            <MessageSquareWarning className="h-4 w-4 sm:h-5 sm:w-5 md:h-7 md:w-7 text-blue-500" />
+            <span className="text-sm sm:text-base md:text-2xl font-bold font-mono">
               <span className="bg-white text-gray-900 px-1">BRO</span>TORAISE
             </span>
           </div>
-          <div className="flex gap-2 md:gap-3">
-            <Button asChild variant="ghost" className="text-white hover:text-blue-400 hover:bg-white/10 h-9 md:h-10 px-3 md:px-4 text-sm md:text-base">
+          <div className="flex gap-1.5 sm:gap-2 md:gap-3">
+            <Button asChild variant="ghost" className="text-white hover:text-blue-400 hover:bg-white/10 h-8 sm:h-9 md:h-10 px-2 sm:px-3 md:px-4 text-xs sm:text-sm md:text-base">
               <Link href="/auth/login">Log In</Link>
             </Button>
-            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white h-9 md:h-10 px-3 md:px-4 text-sm md:text-base">
+            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white h-8 sm:h-9 md:h-10 px-2 sm:px-3 md:px-4 text-xs sm:text-sm md:text-base">
               <Link href="/auth/signup">Get Started</Link>
             </Button>
           </div>

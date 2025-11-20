@@ -185,107 +185,44 @@ export function AdminsList() {
                 }}
                 className="bg-white/5 rounded-lg border border-white/10 p-4 hover:border-blue-500/50 transition-all cursor-pointer"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-3 flex-1">
-                    {/* Avatar */}
-                    <Avatar className="h-12 w-12 border-2 border-white/10">
-                      <AvatarImage src={admin.avatar_url} alt={admin.full_name} />
-                      <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
-                        {admin.full_name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      {/* Avatar */}
+                      <Avatar className="h-12 w-12 border-2 border-white/10 shrink-0">
+                        <AvatarImage src={admin.avatar_url} alt={admin.full_name} />
+                        <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
+                          {admin.full_name.split(' ').map(n => n[0]).join('').toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
 
-                    <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h3 className="text-white font-semibold">{admin.full_name}</h3>
-                      <Badge
-                        className={`font-mono text-xs ${
-                          admin.role === 'super_admin'
-                            ? 'bg-purple-500/20 text-purple-400 border-purple-500/30'
-                            : 'bg-blue-500/20 text-blue-400 border-blue-500/30'
-                        }`}
-                      >
-                        {admin.role === 'super_admin' ? (
-                          <>
-                            <Star className="h-3 w-3 mr-1" />
-                            SUPER ADMIN
-                          </>
-                        ) : (
-                          <>
-                            <Shield className="h-3 w-3 mr-1" />
-                            ADMIN
-                          </>
-                        )}
-                      </Badge>
-                    </div>
-                    <div className="space-y-1 text-sm text-gray-400">
-                      <div className="flex items-center gap-2">
-                        <Mail className="h-4 w-4" />
-                        <span>{admin.email}</span>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <h3 className="text-white font-semibold truncate">{admin.full_name}</h3>
+                        <Badge
+                          className={`font-mono text-xs shrink-0 ${
+                            admin.role === 'super_admin'
+                              ? 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+                              : 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+                          }`}
+                        >
+                          {admin.role === 'super_admin' ? (
+                            <>
+                              <Star className="h-3 w-3 sm:mr-1" />
+                              <span className="hidden sm:inline">SUPER ADMIN</span>
+                            </>
+                          ) : (
+                            <>
+                              <Shield className="h-3 w-3 sm:mr-1" />
+                              <span className="hidden sm:inline">ADMIN</span>
+                            </>
+                          )}
+                        </Badge>
                       </div>
-                      {admin.location && (
-                        <div className="flex items-center gap-2">
-                          <MapPin className="h-4 w-4" />
-                          <span>{admin.location.name}, {admin.location.city}</span>
-                        </div>
-                      )}
                     </div>
-                    </div>
-                  </div>
 
-                  {/* Actions Menu - Only show for regular admins */}
-                  {admin.role === 'admin' && (
-                    <div onClick={(e) => e.stopPropagation()}>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-gray-400 hover:text-white hover:bg-white/10"
-                        >
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-gray-900 border-white/10">
-                        <DropdownMenuItem
-                          onClick={() => {
-                            setCurrentAdmin(admin)
-                            setShowEditDialog(true)
-                          }}
-                          className="text-white hover:bg-white/10 cursor-pointer"
-                        >
-                          <Edit className="h-4 w-4 mr-2" />
-                          Edit Details
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => {
-                            setCurrentAdmin(admin)
-                            setShowPromoteDialog(true)
-                          }}
-                          className="text-purple-400 hover:bg-purple-500/10 cursor-pointer"
-                        >
-                          <TrendingUp className="h-4 w-4 mr-2" />
-                          Promote to Super Admin
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-white/10" />
-                        <DropdownMenuItem
-                          onClick={() => {
-                            setCurrentAdmin(admin)
-                            setShowDeleteDialog(true)
-                          }}
-                          className="text-red-400 hover:bg-red-500/10 cursor-pointer"
-                        >
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Delete Admin
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                    </div>
-                  )}
-
-                  {/* Super Admins - Info menu */}
-                  {admin.role === 'super_admin' && (
-                    <div onClick={(e) => e.stopPropagation()}>
+                    {/* Actions Menu - Only show for regular admins */}
+                    {admin.role === 'admin' && (
+                      <div onClick={(e) => e.stopPropagation()}>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
@@ -298,16 +235,80 @@ export function AdminsList() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="bg-gray-900 border-white/10">
                           <DropdownMenuItem
-                            onClick={() => setShowInfoDialog(true)}
-                            className="text-gray-400 hover:bg-white/10 cursor-pointer"
+                            onClick={() => {
+                              setCurrentAdmin(admin)
+                              setShowEditDialog(true)
+                            }}
+                            className="text-white hover:bg-white/10 cursor-pointer"
                           >
-                            <Info className="h-4 w-4 mr-2" />
-                            Account Information
+                            <Edit className="h-4 w-4 mr-2" />
+                            Edit Details
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setCurrentAdmin(admin)
+                              setShowPromoteDialog(true)
+                            }}
+                            className="text-purple-400 hover:bg-purple-500/10 cursor-pointer"
+                          >
+                            <TrendingUp className="h-4 w-4 mr-2" />
+                            Promote to Super Admin
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator className="bg-white/10" />
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setCurrentAdmin(admin)
+                              setShowDeleteDialog(true)
+                            }}
+                            className="text-red-400 hover:bg-red-500/10 cursor-pointer"
+                          >
+                            <Trash2 className="h-4 w-4 mr-2" />
+                            Delete Admin
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
+                      </div>
+                    )}
+
+                    {/* Super Admins - Info menu */}
+                    {admin.role === 'super_admin' && (
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-8 w-8 text-gray-400 hover:text-white hover:bg-white/10"
+                            >
+                              <MoreVertical className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="bg-gray-900 border-white/10">
+                            <DropdownMenuItem
+                              onClick={() => setShowInfoDialog(true)}
+                              className="text-gray-400 hover:bg-white/10 cursor-pointer"
+                            >
+                              <Info className="h-4 w-4 mr-2" />
+                              Account Information
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="space-y-1 text-sm text-gray-400">
+                    <div className="flex items-center gap-2">
+                      <Mail className="h-4 w-4" />
+                      <span>{admin.email}</span>
                     </div>
-                  )}
+                    {admin.location && (
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-4 w-4" />
+                        <span>{admin.location.name}, {admin.location.city}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
