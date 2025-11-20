@@ -9,6 +9,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/client'
@@ -27,6 +33,16 @@ export function StudentProfileDialog({ studentId, open, onOpenChange }: StudentP
   const [isLoading, setIsLoading] = useState(false)
   const [selectedComplaintId, setSelectedComplaintId] = useState<string | null>(null)
   const [showComplaintView, setShowComplaintView] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     if (open && studentId) {
@@ -101,13 +117,7 @@ export function StudentProfileDialog({ studentId, open, onOpenChange }: StudentP
 
   const stats = getComplaintStats()
 
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-gray-900 border-white/10 text-white !max-w-[98vw] !w-[98vw] !h-[98vh] overflow-hidden flex flex-col p-0 !z-[55]">
-        <DialogHeader className="flex-shrink-0 px-6 pt-6 pb-4 border-b border-white/10">
-          <DialogTitle className="text-xl sm:text-2xl font-bold font-mono">Student Profile</DialogTitle>
-        </DialogHeader>
-
+  const modalContent = (
         <div className="flex-1 overflow-y-auto pr-2 px-6 py-4">
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
@@ -134,9 +144,6 @@ export function StudentProfileDialog({ studentId, open, onOpenChange }: StudentP
                 <div className="flex-1 space-y-3">
                   <div>
                     <h3 className="text-xl sm:text-2xl font-bold text-white text-center sm:text-left">{profile.full_name}</h3>
-                    <Badge className="bg-gray-500/20 text-gray-400 border-gray-500/30 mt-2">
-                      {profile.role?.toUpperCase()}
-                    </Badge>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-sm">
                     <div className="flex items-center gap-2 text-gray-400">
@@ -235,7 +242,31 @@ export function StudentProfileDialog({ studentId, open, onOpenChange }: StudentP
             </div>
           )}
         </div>
-      </DialogContent>
+  )
+
+  return (
+    <>
+      {isMobile ? (
+        <Drawer open={open} onOpenChange={onOpenChange}>
+          <DrawerContent className="h-[90vh] bg-gray-900 border-t-2 border-white/20 p-0 overflow-hidden !z-[55]">
+            <div className="h-full flex flex-col">
+              <DrawerHeader className="px-6 pt-6 pb-4 border-b border-white/10">
+                <DrawerTitle className="text-xl font-bold font-mono text-white text-left">Student Profile</DrawerTitle>
+              </DrawerHeader>
+              {modalContent}
+            </div>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Dialog open={open} onOpenChange={onOpenChange}>
+          <DialogContent className="bg-gray-900 border-white/10 text-white !max-w-[98vw] !w-[98vw] !h-[98vh] overflow-hidden flex flex-col p-0 !z-[55]">
+            <DialogHeader className="flex-shrink-0 px-6 pt-6 pb-4 border-b border-white/10">
+              <DialogTitle className="text-xl sm:text-2xl font-bold font-mono">Student Profile</DialogTitle>
+            </DialogHeader>
+            {modalContent}
+          </DialogContent>
+        </Dialog>
+      )}
 
       {/* Complaint View Modal */}
       <ComplaintViewModal
@@ -243,6 +274,6 @@ export function StudentProfileDialog({ studentId, open, onOpenChange }: StudentP
         open={showComplaintView}
         onOpenChange={setShowComplaintView}
       />
-    </Dialog>
+    </>
   )
 }

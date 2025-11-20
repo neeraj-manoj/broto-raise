@@ -12,6 +12,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer'
 import { COMPLAINT_CATEGORIES } from '@/lib/constants'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
@@ -35,6 +41,16 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange, onUpdate }
   const [previousResponse, setPreviousResponse] = useState('')
   const [hasEnhanced, setHasEnhanced] = useState(false)
   const [adminProfile, setAdminProfile] = useState<any>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     setCurrentComplaint(complaint)
@@ -286,16 +302,8 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange, onUpdate }
     }
   }
 
-  return (
+  const modalContent = (
     <>
-      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="bg-gray-900 text-gray-100 w-[95vw] max-w-[1400px] max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] sm:max-w-[1400px] p-4 md:p-6">
-          <DialogHeader className="mb-3 md:mb-4">
-            <DialogTitle className="text-xl md:text-2xl font-bold font-mono text-white pr-8">
-              {complaint.title}
-            </DialogTitle>
-        </DialogHeader>
-
         {/* Badges */}
         <div className="flex items-center gap-2 flex-wrap text-sm md:text-base">
           <Badge className={`${statusColors[complaint.status as keyof typeof statusColors]} font-mono text-xs`}>
@@ -320,7 +328,7 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange, onUpdate }
         </div>
 
         {/* Two-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
           {/* Left Column - Complaint Details */}
           <div className="space-y-6">
             {/* Metadata */}
@@ -602,8 +610,38 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange, onUpdate }
             </div>
           </div>
         </div>
-        </DialogContent>
-      </Dialog>
+    </>
+  )
+
+  return (
+    <>
+      {isMobile ? (
+        <Drawer open={open} onOpenChange={onOpenChange}>
+          <DrawerContent className="h-[90vh] bg-gray-900 border-t-2 border-white/20 p-0 overflow-hidden !z-[50]">
+            <div className="h-full flex flex-col">
+              <DrawerHeader className="px-6 pt-6 pb-4 border-b border-white/10">
+                <DrawerTitle className="text-xl font-bold font-mono text-white text-left">
+                  {complaint.title}
+                </DrawerTitle>
+              </DrawerHeader>
+              <div className="flex-1 overflow-y-auto px-4 py-4 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-white/20 [&::-webkit-scrollbar-thumb]:rounded-full">
+                {modalContent}
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Dialog open={open} onOpenChange={onOpenChange}>
+          <DialogContent className="bg-gray-900 text-gray-100 w-[95vw] max-w-[1400px] max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] sm:max-w-[1400px] p-4 md:p-6 !z-[50]">
+            <DialogHeader className="mb-3 md:mb-4">
+              <DialogTitle className="text-xl md:text-2xl font-bold font-mono text-white pr-8">
+                {complaint.title}
+              </DialogTitle>
+            </DialogHeader>
+            {modalContent}
+          </DialogContent>
+        </Dialog>
+      )}
 
       {/* Student Profile Dialog */}
       {!currentComplaint.is_anonymous && currentComplaint.student_id && (
