@@ -85,12 +85,14 @@ export function SuperAdminHeader({ user, profile }: SuperAdminHeaderProps) {
           {/* Actions */}
           <div className="flex items-center gap-3">
             {/* Analytics Button */}
-            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 hidden md:flex">
-              <Link href="/admin/analytics">
-                <LayoutDashboard className="h-4 w-4 mr-2" />
-                Analytics
-              </Link>
-            </Button>
+            {pathname !== '/admin/analytics' && (
+              <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 hidden md:flex">
+                <Link href="/admin/analytics">
+                  <LayoutDashboard className="h-4 w-4 mr-2" />
+                  Analytics
+                </Link>
+              </Button>
+            )}
 
             {/* Notifications */}
             <NotificationsDropdown userId={user.id} />

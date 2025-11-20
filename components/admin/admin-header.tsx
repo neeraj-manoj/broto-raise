@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { MessageSquareWarning, Settings, LogOut, User, LayoutDashboard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/client'
@@ -24,6 +24,7 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ user, profile }: AdminHeaderProps) {
   const router = useRouter()
+  const pathname = usePathname()
 
   const handleSignOut = async () => {
     const supabase = createClient()
@@ -55,12 +56,14 @@ export function AdminHeader({ user, profile }: AdminHeaderProps) {
           {/* Actions */}
           <div className="flex items-center gap-2 md:gap-3">
             {/* Analytics Button */}
-            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 hidden md:flex h-9 md:h-10">
-              <Link href="/admin/analytics">
-                <LayoutDashboard className="h-4 w-4 mr-2" />
-                Analytics
-              </Link>
-            </Button>
+            {pathname !== '/admin/analytics' && (
+              <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 hidden md:flex h-9 md:h-10">
+                <Link href="/admin/analytics">
+                  <LayoutDashboard className="h-4 w-4 mr-2" />
+                  Analytics
+                </Link>
+              </Button>
+            )}
 
             {/* Notifications */}
             <NotificationsDropdown userId={user.id} />

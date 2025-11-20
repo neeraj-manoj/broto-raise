@@ -66,6 +66,7 @@ export default async function AnalyticsPage() {
           <AnalyticsDashboard
             complaints={complaints || []}
             locations={locations || []}
+            role={profile?.role}
           />
         </main>
 

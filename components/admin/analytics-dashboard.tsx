@@ -60,9 +60,10 @@ const CATEGORY_CODES: Record<string, string> = {
 interface AnalyticsDashboardProps {
   complaints: any[]
   locations: any[]
+  role?: string
 }
 
-export function AnalyticsDashboard({ complaints, locations }: AnalyticsDashboardProps) {
+export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDashboardProps) {
   const [selectedLocation, setSelectedLocation] = useState<string>('all')
   const [timeRange, setTimeRange] = useState<string>('30')
 
@@ -274,7 +275,7 @@ export function AnalyticsDashboard({ complaints, locations }: AnalyticsDashboard
       {/* Header */}
       <div className="mb-6 lg:mb-8">
         <Button asChild variant="ghost" className="text-white hover:bg-white/10 mb-4 h-9 hidden lg:inline-flex">
-          <Link href="/admin">
+          <Link href={role === 'super_admin' ? '/super-admin' : '/admin'}>
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
           </Link>
