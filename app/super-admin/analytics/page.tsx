@@ -10,7 +10,7 @@ const AnalyticsDashboard = dynamic(() => import('@/components/admin/analytics-da
   ),
 });
 
-export default async function AnalyticsPage() {
+export default async function SuperAdminAnalyticsPage() {
   const supabase = await createServerSupabaseClient()
 
   // Check authentication
@@ -18,7 +18,7 @@ export default async function AnalyticsPage() {
 
   if (!user) return null
 
-  // Get user profile and verify admin role
+  // Get user profile
   const { data: profile } = await supabase
     .from('profiles')
     .select('*')

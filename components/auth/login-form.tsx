@@ -15,6 +15,7 @@ import { toast } from 'sonner'
 export function LoginForm() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [isRedirecting, setIsRedirecting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showResetDialog, setShowResetDialog] = useState(false)
   const [resetStatus, setResetStatus] = useState<'loading' | 'success' | 'error'>('loading')
@@ -51,7 +52,10 @@ export function LoginForm() {
           .single()
 
         toast.success('Login successful!')
-
+        
+        // Show redirecting state
+        setIsRedirecting(true)
+        
         // Redirect based on role
         if (profile?.role === 'super_admin') {
           router.push('/super-admin')
@@ -61,13 +65,13 @@ export function LoginForm() {
           router.push('/dashboard')
         }
         router.refresh()
+        return // Don't execute finally block
       }
     } catch (err) {
       setError('An unexpected error occurred')
-
-    } finally {
       setIsLoading(false)
     }
+    // Remove finally block to prevent resetting loading state on success
   }
 
   const handleGitHubLogin = async () => {
@@ -187,9 +191,9 @@ export function LoginForm() {
             </div>
           </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white" disabled={isLoading}>
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign In
+          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white" disabled={isLoading || isRedirecting}>
+            {(isLoading || isRedirecting) && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isRedirecting ? 'Redirecting...' : isLoading ? 'Signing In...' : 'Sign In'}
           </Button>
 
           <div className="relative my-4">

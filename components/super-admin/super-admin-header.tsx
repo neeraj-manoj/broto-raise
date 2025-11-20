@@ -85,9 +85,17 @@ export function SuperAdminHeader({ user, profile }: SuperAdminHeaderProps) {
           {/* Actions */}
           <div className="flex items-center gap-3">
             {/* Analytics Button */}
-            {pathname !== '/admin/analytics' && (
+            {pathname === '/super-admin/analytics' ? (
+              <Button 
+                variant="outline" 
+                className="hidden md:flex bg-purple-500/20 text-purple-400 border-purple-500/50 hover:bg-purple-500/20 hover:text-purple-400 cursor-default"
+              >
+                <LayoutDashboard className="h-4 w-4 mr-2" />
+                Analytics
+              </Button>
+            ) : (
               <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 hidden md:flex">
-                <Link href="/admin/analytics">
+                <Link href="/super-admin/analytics">
                   <LayoutDashboard className="h-4 w-4 mr-2" />
                   Analytics
                 </Link>

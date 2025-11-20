@@ -22,7 +22,7 @@ export function MobileBottomNav({ role }: MobileNavProps) {
   const superAdminLinks = [
     { href: '/super-admin', icon: Home, label: 'Dashboard' },
     { href: '/super-admin/admins', icon: Users, label: 'Admins' },
-    { href: '/admin/analytics', icon: LayoutDashboard, label: 'Analytics' },
+    { href: '/super-admin/analytics', icon: LayoutDashboard, label: 'Analytics' },
     { href: '/super-admin/profile', icon: User, label: 'Profile' },
     { href: '/super-admin/settings', icon: Settings, label: 'Settings' },
   ]

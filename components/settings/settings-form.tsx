@@ -138,13 +138,15 @@ export function SettingsForm({ user, profile, locations = [], isAdmin = false }:
 
   return (
     <div className="space-y-6">
-      {/* Back Button */}
-      <Button asChild variant="ghost" className="text-white hover:bg-white/10 hidden lg:inline-flex">
-        <Link href={isAdmin ? "/admin" : "/dashboard"}>
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Dashboard
-        </Link>
-      </Button>
+      {/* Back Button - Hidden for Super Admin */}
+      {profile?.role !== 'super_admin' && (
+        <Button asChild variant="ghost" className="text-white hover:bg-white/10 hidden lg:inline-flex">
+          <Link href={isAdmin ? "/admin" : "/dashboard"}>
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Dashboard
+          </Link>
+        </Button>
+      )}
 
       {/* Profile Information */}
       <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-8">
