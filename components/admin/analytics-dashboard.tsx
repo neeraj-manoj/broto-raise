@@ -274,15 +274,21 @@ export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDas
     <div>
       {/* Header */}
       <div className="mb-6 lg:mb-8">
-        <Button asChild variant="ghost" className="text-white hover:bg-white/10 mb-4 h-9 hidden lg:inline-flex">
-          <Link href={role === 'super_admin' ? '/super-admin' : '/admin'}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
-          </Link>
-        </Button>
         <div className="space-y-4">
           <div>
-            <h1 className="text-2xl lg:text-4xl font-black font-mono mb-2">Analytics</h1>
+            <div className="flex items-center justify-between mb-4">
+              <h1 className="text-2xl lg:text-4xl font-black font-mono">Analytics</h1>
+              <Button
+                asChild
+                variant="outline"
+                className="hidden lg:flex border-white/20 text-white hover:bg-white/10"
+              >
+                <Link href={role === 'super_admin' ? '/super-admin' : '/admin'} className="flex items-center gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  Back to Dashboard
+                </Link>
+              </Button>
+            </div>
             <p className="text-sm lg:text-base text-gray-400">
               Detailed insights and reports across all Brocamp locations
             </p>

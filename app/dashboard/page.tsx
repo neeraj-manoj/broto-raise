@@ -55,7 +55,7 @@ export default async function DashboardPage() {
       <div className="mb-8">
         <h1 className="text-4xl font-black font-mono mb-2">Community Feed</h1>
         <p className="text-gray-400">
-          See what's happening in your campus
+          See what's happening in your Brocamp
         </p>
       </div>
 

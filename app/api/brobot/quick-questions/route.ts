@@ -107,6 +107,8 @@ function getFeatureBank(userRole: string): string {
 - Admin response textarea for typing replies
 - Student notifications when you respond
 - Filter complaints by category, status, priority
+- Sort by: Newest, Oldest, Most Upvoted, Priority
+- Upvote counts visible on all non-anonymous complaints
 - Download complaint attachments`
   } else if (userRole === 'super_admin') {
     return `Available Super Admin Features:
@@ -125,10 +127,15 @@ function getFeatureBank(userRole: string): string {
 - 4 Priority levels: LOW, MEDIUM, HIGH, URGENT
 - "Submit Anonymously" toggle to hide your name
 - "Enhance with AI" button to improve your description
-- "My Complaints" page to track submissions
+- Community Feed on Dashboard - see all public complaints from your campus
+- Upvote system - vote on complaints you relate to
+- Student profiles - view other students' public complaints
+- "My Complaints" page to track YOUR personal submissions
+- "Back to Dashboard" button (desktop) to return to Community Feed
 - Real-time status updates (NEW → IN PROGRESS → RESOLVED)
 - File attachments (images/documents)
 - View admin responses and replies
+- Sort by: Newest, Oldest, Most Upvoted
 - Notification when admin responds`
   }
 }
@@ -149,7 +156,8 @@ function getAllowedKeywords(userRole: string): string[] {
     return [
       'generate', 'enhance', 'ai', 'undo', 'status', 'profile', 'view',
       'respond', 'reply', 'modal', 'student', 'notification', 'filter',
-      'attachment', 'download', 'review', 'progress', 'resolved', 'closed'
+      'attachment', 'download', 'review', 'progress', 'resolved', 'closed',
+      'upvote', 'upvoted', 'sort', 'priority', 'trending'
     ]
   } else if (userRole === 'super_admin') {
     return [
@@ -161,7 +169,9 @@ function getAllowedKeywords(userRole: string): string[] {
     return [
       'complaint', 'submit', 'anonymous', 'category', 'categories', 'priority',
       'enhance', 'ai', 'track', 'status', 'attachment', 'file', 'response',
-      'notification', 'mentor', 'admin', 'counsellor', 'hub', 'peer', 'urgent'
+      'notification', 'mentor', 'admin', 'counsellor', 'hub', 'peer', 'urgent',
+      'community', 'feed', 'upvote', 'vote', 'profile', 'student', 'dashboard',
+      'my complaints', 'public', 'sort', 'trending'
     ]
   }
 }
@@ -172,7 +182,7 @@ function getDefaultQuestions(userRole: string): string[] {
       "How do I use AI to respond?",
       "What's Generate vs Enhance AI?",
       "How do I change status?",
-      "How do I view student profiles?",
+      "How can I sort by most upvoted?",
     ]
   } else if (userRole === 'super_admin') {
     return [
@@ -184,9 +194,9 @@ function getDefaultQuestions(userRole: string): string[] {
   } else {
     return [
       "How do I raise a complaint?",
-      "Can I submit anonymously?",
-      "What categories are available?",
-      "How does AI Enhancement work?",
+      "What's the Community Feed?",
+      "How does upvoting work?",
+      "What's the difference between Dashboard and My Complaints?",
     ]
   }
 }

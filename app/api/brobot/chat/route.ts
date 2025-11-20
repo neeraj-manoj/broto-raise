@@ -158,12 +158,24 @@ Mobile Navigation:
 - You can override if needed
 
 **4. TRACKING YOUR COMPLAINTS** 📊
-Your Dashboard Shows:
-- All your complaints sorted by newest first
-- Live status updates (no refresh needed!)
-- Admin responses and internal notes
-- Upvote count if public
-- Color-coded priority badges
+**Two Ways to View Your Complaints:**
+
+**A) Dashboard (Community Feed)** 🌐
+- Shows ALL public complaints from students at your location
+- See what issues others are facing
+- Upvote complaints you relate to
+- Click student names to view their profiles
+- Sort by: Newest, Oldest, Most Upvoted
+- Desktop: Action card with "Raise New Complaint" and "My Complaints" buttons
+- Mobile: Glowing plus (+) button in center of bottom nav
+
+**B) My Complaints Page** 📋
+- Shows ONLY YOUR complaints (both public and anonymous)
+- Access via: Bottom nav "Complaints" tab (mobile) or action card (desktop)
+- Desktop: "Back to Dashboard" button (top-right) to return to community feed
+- Your personal stats: Total, Pending, In Progress, Resolved
+- Filter and sort your own complaints
+- All complaints update in real-time (no refresh needed!)
 
 **5. STATUS LIFECYCLE** 🔄
 Your complaint goes through these stages:
@@ -194,16 +206,74 @@ You'll get instant notifications when:
 - Status changes (e.g., moved to In Progress)
 - Admin updates their response
 - Your complaint is resolved
+- Someone upvotes your public complaint (if enabled)
 
-**9. VIEWING RESPONSES** 💬
+**9. VIEWING RESPONSES & DETAILS** 💬
 - Click any complaint card to open detail modal
 - See admin's response in a dedicated section
 - Read any internal notes marked as public
 - Download your attachments
+- View upvote count and who upvoted (for public complaints)
+- See full complaint history and status timeline
 
-**10. ME - BROBOT!** 🤖
+**10. COMMUNITY FEED & SOCIAL FEATURES** 🌐
+**Your Dashboard is Now a Community Feed!**
+- See all **public (non-anonymous) complaints** from students at your location
+- Discover what issues other students are facing
+- Each post shows: student name, batch, complaint title, description, and status
+- Real-time updates as complaints are added or upvotes change
+
+**Upvoting System** 👍
+- **Upvote complaints** you relate to or find important
+- Higher upvotes signal to admins which issues affect multiple students
+- Click the thumbs-up icon on any complaint in the community feed
+- Your upvotes are tracked - click again to remove your vote
+- See upvote counts on all public complaints
+- Sort by "Most Upvoted" to see trending issues
+
+**Student Profiles** 👤
+- Click on any student's name/avatar in the community feed
+- View their: Full name, batch, campus location
+- See their **public complaints** (recent activity)
+- Stats: Total complaints raised, join date
+- Desktop: Opens in a dialog modal
+- Mobile: Opens in a bottom drawer
+- Great way to see if others have similar issues!
+
+**My Complaints Page** 📋
+- Dedicated page for **YOUR personal complaints only**
+- Access via: "My Complaints" link in bottom nav (mobile) or action card (desktop)
+- Desktop users: Look for "Back to Dashboard" button (top-right) to return to community feed
+- Shows all YOUR complaints (both anonymous and public)
+- Your personal stats: Total, Pending, In Progress, Resolved
+- Filter, sort, and manage just like before
+- Anonymous complaints appear here but NOT in community feed
+
+**Navigation Between Pages:**
+- **Dashboard** = Community Feed (see everyone's public complaints, upvote, view profiles)
+- **My Complaints** = Your personal complaint manager (all your complaints)
+- Desktop: Action card with big buttons for "Raise New Complaint" and "My Complaints"
+- Mobile: Bottom nav bar has dedicated "Complaints" tab linking to My Complaints
+- Desktop (My Complaints page): "Back to Dashboard" button in top-right corner
+
+**Sorting Options** 🔢
+Students can sort by:
+- **Newest First** (default) - Most recent complaints on top
+- **Oldest First** - See historical issues
+- **Most Upvoted** - Trending/popular complaints
+
+**Privacy & Anonymous Mode:**
+- Anonymous complaints do NOT appear in community feed
+- Only admins can see anonymous complaint authors
+- Your anonymous complaints are still in "My Complaints" page
+- Community feed only shows public complaints from your location
+
+**11. ME - BROBOT!** 🤖
 I'm here 24/7 to help you with:
-- How to submit complaints
+- How to submit complaints and use AI enhancement
+- Understanding the community feed and upvoting
+- Viewing student profiles and discovering related issues
+- Navigating between Dashboard and My Complaints
 - Understanding statuses and categories
 - Tips for writing effective complaints
 - Questions about Brocamp, Brototype
@@ -220,7 +290,15 @@ See at a glance:
 - Pending complaints needing attention
 - Active urgent issues
 - Average resolution time
+- **Upvote counts** on all complaints (shows student engagement)
 - Filter by: Status, Priority, Category, Location, Date Range
+- **Sort by**: Newest, Oldest, **Most Upvoted**, Priority (Highest First)
+
+**Most Upvoted Sort** 👍
+- See which complaints have the most student engagement
+- Helps prioritize issues affecting multiple students
+- Upvote counts visible for all non-anonymous complaints
+- Great indicator of campus-wide concerns
 
 **2. COMPLAINT MANAGEMENT - THE MODAL** 🎛️
 Click ANY complaint card → Opens beautiful TWO-COLUMN MODAL:
@@ -284,12 +362,19 @@ Any Status:
 - Smart system prevents accidental overwrites
 
 **5. STUDENT PROFILES** 👤
-Click "View Profile" button to see:
+Click "View Profile" button or student name/avatar to see:
 - Student name, email, roll number, batch
 - Location/campus
-- All their complaints (current + history)
+- All their **public (non-anonymous) complaints** (current + history)
+- Total complaints raised by this student
+- Join date and account creation
+- Recent activity and complaint patterns
 - Patterns (frequent complainer? justified issues?)
-- Helps you understand context
+- Helps you understand context before responding
+- Desktop: Opens in dialog modal
+- Mobile: Opens in bottom drawer
+
+**Note:** Anonymous complaints are hidden from profile view for student privacy.
 
 **6. NOTIFICATIONS FOR YOU** 🔔
 Get alerted when:
@@ -464,6 +549,14 @@ Neeraj M - 18-year-old Class 12 student and absolute vibe coder!
 8. Advanced analytics dashboard
 9. Multi-role system (student/admin/super_admin)
 10. Mobile-optimized for students on the go
+11. **Community Feed** - See all public complaints at your location
+12. **Upvoting System** - Vote on complaints you relate to
+13. **Student Profiles** - View other students' public activity
+14. **My Complaints Page** - Dedicated personal complaint manager
+15. **Sort by Most Upvoted** - See trending campus issues
+16. **Optimistic UI Updates** - Instant feedback on upvotes
+17. **Location-based Filtering** - Only see complaints from your campus
+18. **Social Discovery** - Find students with similar issues
 
 ---
 
@@ -566,10 +659,12 @@ function getTemplateResponse(message: string, userRole: string = 'student', user
   if (/(what|do|what's).*(do now|next|should i do|to do|do i do)/i.test(message)) {
     if (currentPage?.includes('new-complaint') || currentPage?.includes('/dashboard/new-complaint')) {
       return `You're on the complaint submission page! Here's what to do:\n\n📝 **Step 1**: Fill in your complaint title and description. Click "Enhance with AI" if you want to make it more detailed and professional!\n\n📁 **Step 2**: Add any supporting files (screenshots, documents) - optional but helpful.\n\n🎯 **Step 3**: Select the category that best fits your issue, choose priority level, and hit Submit!\n\nNeed help with any specific step? Just ask! 😊`
+    } else if (currentPage?.includes('/my-complaints')) {
+      return `You're on your **My Complaints** page! 📋 Here's what you can do:\n\n✅ Review all YOUR complaints (both public and anonymous)\n📊 Check which ones are pending, in progress, or resolved\n💬 See any admin responses\n🔍 Filter or sort your complaints\n➕ Submit a new complaint if needed\n🔙 Desktop: Click "Back to Dashboard" (top-right) to return to Community Feed\n\nWhat would you like to do? 🚀`
     } else if (currentPage?.includes('/dashboard')) {
-      return `You're on your dashboard! Here's what you can do:\n\n📊 View all your complaints and check their current status\n✅ See which ones are resolved or in progress\n➕ Submit a new complaint using the "New Complaint" button\n💬 Check any admin responses\n\nWhat would you like to do? 🚀`
+      return `You're on the **Community Feed** (Dashboard)! 🌐 Here's what you can do:\n\n👍 **Upvote** complaints you relate to\n👤 **View student profiles** by clicking their names\n🔢 **Sort by Most Upvoted** to see trending campus issues\n📋 **Go to My Complaints** to manage your personal complaints\n➕ **Submit a new complaint** using the action card (desktop) or plus button (mobile)\n\nWhat interests you? 😊`
     } else {
-      return `Hey! You can:\n\n• Submit a new complaint if you have an issue\n• Track your existing complaints on your dashboard\n• Ask me questions about BrotoRaise, Brocamp, or Brototype\n\nWhat interests you? 😊`
+      return `Hey! You can:\n\n🌐 Browse the **Community Feed** (Dashboard) to see public complaints and upvote\n📋 Visit **My Complaints** to manage your personal complaints\n➕ Submit a new complaint if you have an issue\n💬 Ask me questions about BrotoRaise, Brocamp, or Brototype\n\nWhat interests you? 😊`
     }
   }
 
@@ -594,6 +689,9 @@ function getTemplateResponse(message: string, userRole: string = 'student', user
       response += `💡 **I can help you with**:\n`
       response += `• Submitting new complaints (step-by-step guide!)\n`
       response += `• Using AI to enhance your descriptions\n`
+      response += `• Understanding the Community Feed and upvoting\n`
+      response += `• Viewing student profiles and finding similar issues\n`
+      response += `• Navigating between Dashboard and My Complaints\n`
       response += `• Understanding statuses, categories, and priorities\n`
       response += `• Anonymous submission tips\n`
       response += `• Questions about Brocamp, Brototype, or Nikhil\n`
@@ -619,6 +717,8 @@ function getTemplateResponse(message: string, userRole: string = 'student', user
       response += `⚡ **I can help with**:\n`
       response += `• Using AI response tools (Generate vs Enhance - I'll explain!)\n`
       response += `• Efficient complaint management workflows\n`
+      response += `• Understanding upvote counts and trending issues\n`
+      response += `• Sorting by Most Upvoted to prioritize high-engagement complaints\n`
       response += `• Best practices for responses\n`
       response += `• Understanding the two-column modal system\n`
       response += `• Viewing student profiles and context\n`
@@ -690,7 +790,35 @@ function getTemplateResponse(message: string, userRole: string = 'student', user
 
   // === ANONYMOUS SUBMISSION ===
   if (/(anonymous|hide.*name|private|confidential|secret)/i.test(message)) {
-    return `Yes! You can submit anonymously! 🕵️ Just toggle the **"Submit Anonymously"** option when creating your complaint. Your name will be hidden from other students, but admins can still see who submitted (for accountability). Perfect for sensitive issues where you want privacy!`
+    return `Yes! You can submit anonymously! 🕵️ Just toggle the **"Submit Anonymously"** option when creating your complaint. Your name will be hidden from other students, but admins can still see who submitted (for accountability). Perfect for sensitive issues where you want privacy!\n\n⚠️ Note: Anonymous complaints won't appear in the Community Feed - only admins can see them. They'll still show in your "My Complaints" page though!`
+  }
+
+  // === COMMUNITY FEED / UPVOTING ===
+  if (/(community feed|upvote|upvoting|vote|like|thumbs up|social|other students|public complaints)/i.test(message)) {
+    if (userRole === 'student') {
+      return `The **Community Feed** is your main dashboard! 🌐 It shows all **public (non-anonymous) complaints** from students at your location. You can:\n\n👍 **Upvote** complaints you relate to (click the thumbs-up icon)\n👤 **View student profiles** (click their name/avatar)\n🔢 **Sort by Most Upvoted** to see trending campus issues\n📊 See what problems affect multiple students\n\n💡 Your anonymous complaints don't appear here - they're private and only visible to you (in My Complaints) and admins!`
+    } else {
+      return `The **upvoting system** helps you see which issues affect multiple students! 👍\n\n• Upvote counts appear on all non-anonymous complaints\n• Sort by "Most Upvoted" to prioritize high-engagement issues\n• Students can upvote complaints they relate to\n• Great indicator of campus-wide concerns\n\nThis helps you focus on problems that matter to the broader student community!`
+    }
+  }
+
+  // === MY COMPLAINTS PAGE ===
+  if (/(my complaints|personal complaints|where.*my|view my|track my)/i.test(message)) {
+    if (userRole === 'student') {
+      return `**My Complaints** is your personal complaint manager! 📋\n\n📱 **Mobile**: Tap the "Complaints" tab in your bottom nav bar\n💻 **Desktop**: Click "My Complaints" in the action card on your dashboard\n\nIt shows ALL your complaints (both public and anonymous) with:\n• Your personal stats (Total, Pending, In Progress, Resolved)\n• Filter and sort options\n• Real-time status updates\n\n💡 Desktop tip: Use the "Back to Dashboard" button (top-right) to return to the Community Feed!`
+    } else {
+      return `Students now have a dedicated **"My Complaints"** page where they can view and manage all their personal complaints (both public and anonymous). This is separate from the main Dashboard which now shows the community feed. They can access it via the bottom nav (mobile) or action card (desktop).`
+    }
+  }
+
+  // === STUDENT PROFILES ===
+  if (/(student profile|view profile|other student|who|see.*student)/i.test(message) && userRole === 'student') {
+    return `Click on any student's **name or avatar** in the Community Feed to view their profile! 👤\n\nYou'll see:\n• Their full name, batch, and campus location\n• Total complaints they've raised\n• Their **public complaints** (recent activity)\n• When they joined\n\n💡 Anonymous complaints are hidden for privacy. Desktop opens a dialog modal, mobile shows a bottom drawer. Great way to find students with similar issues!`
+  }
+
+  // === DASHBOARD VS MY COMPLAINTS ===
+  if (/(dashboard|difference|what's the difference|main page|home)/i.test(message) && userRole === 'student') {
+    return `Great question! Here's the difference:\n\n🌐 **Dashboard (Community Feed)**:\n• Shows ALL public complaints from students at your location\n• Upvote complaints you relate to\n• View student profiles\n• Discover campus-wide issues\n\n📋 **My Complaints Page**:\n• Shows ONLY YOUR complaints (public + anonymous)\n• Personal stats and management\n• Access via bottom nav (mobile) or action card (desktop)\n• Desktop: "Back to Dashboard" button to return\n\nThink of Dashboard as the community, My Complaints as your personal space! 😊`
   }
 
   // === CATEGORIES ===
@@ -720,9 +848,9 @@ function getTemplateResponse(message: string, userRole: string = 'student', user
   // === TRACKING COMPLAINTS ===
   if (/(track|check|view|see|find).*(complaint|status|my complaint)/i.test(message)) {
     if (userStats && userStats.total > 0) {
-      return `Your dashboard shows all ${userStats.total} of your complaints sorted by newest first! Each card displays the current status, priority, and any admin responses. Everything updates in real-time - no refresh needed! ${userStats.pending > 0 ? `You have ${userStats.pending} still pending.` : 'All caught up!'} 📊`
+      return `You have ${userStats.total} complaint${userStats.total !== 1 ? 's' : ''}! 📊\n\n🌐 **Dashboard**: See all public complaints from your campus + upvote and view profiles\n📋 **My Complaints**: View just YOUR complaints (${userStats.total} total)\n\n${userStats.pending > 0 ? `• ${userStats.pending} pending\n` : ''}${userStats.inProgress > 0 ? `• ${userStats.inProgress} in progress\n` : ''}${userStats.resolved > 0 ? `• ${userStats.resolved} resolved\n` : ''}\nEverything updates in real-time! Access "My Complaints" via bottom nav (mobile) or action card (desktop).`
     }
-    return `Your dashboard shows all your complaints sorted by newest first! Each card displays the current status, priority, and any admin responses. Everything updates in real-time - no refresh needed! 📊`
+    return `Track your complaints in two places:\n\n🌐 **Dashboard**: See all public complaints from your campus (community feed)\n📋 **My Complaints**: Your personal complaint manager with all YOUR complaints\n\nBoth update in real-time with status changes, admin responses, and upvotes! 📊`
   }
 
   // === RESPONSE TIME ===
@@ -810,9 +938,23 @@ async function getHuggingFaceResponse(
       contextInfo += `• Step 2: Add attachments (optional)\n`
       contextInfo += `• Step 3: Select category, priority, and submit\n`
       contextInfo += `DO NOT give general life advice - focus on the complaint form!\n`
-    } else if (currentPage.includes('/dashboard')) {
-      contextInfo += `\n⚠️ USER IS ON THEIR DASHBOARD!\n`
-      contextInfo += `If they ask "what to do now" - suggest viewing their complaints, checking statuses, or submitting a new one.\n`
+    } else if (currentPage.includes('/my-complaints')) {
+      contextInfo += `\n⚠️ USER IS ON THEIR "MY COMPLAINTS" PAGE!\n`
+      contextInfo += `This shows ONLY their personal complaints (both public and anonymous).\n`
+      contextInfo += `If they ask "what to do now" - suggest:\n`
+      contextInfo += `• Review their complaint statuses\n`
+      contextInfo += `• Check admin responses\n`
+      contextInfo += `• Submit a new complaint if needed\n`
+      contextInfo += `• Use "Back to Dashboard" button (desktop) to return to Community Feed\n`
+    } else if (currentPage.includes('/dashboard') && !currentPage.includes('/my-complaints')) {
+      contextInfo += `\n⚠️ USER IS ON THEIR DASHBOARD (COMMUNITY FEED)!\n`
+      contextInfo += `This shows ALL public complaints from students at their location.\n`
+      contextInfo += `If they ask "what to do now" - suggest:\n`
+      contextInfo += `• Browse community complaints and upvote ones they relate to\n`
+      contextInfo += `• Click student profiles to see their activity\n`
+      contextInfo += `• Sort by "Most Upvoted" to see trending issues\n`
+      contextInfo += `• Submit a new complaint via action card (desktop) or plus button (mobile)\n`
+      contextInfo += `• Go to "My Complaints" to view/manage their personal complaints\n`
     }
   }
 

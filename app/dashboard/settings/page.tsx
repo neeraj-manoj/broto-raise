@@ -1,5 +1,8 @@
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 import { SettingsForm } from '@/components/settings/settings-form'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export default async function SettingsPage() {
   const supabase = await createServerSupabaseClient()
@@ -24,7 +27,19 @@ export default async function SettingsPage() {
   return (
     <main className="container mx-auto px-4 py-8 pb-24 lg:pb-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-black font-mono mb-2">Settings</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-3xl md:text-4xl font-black font-mono">Settings</h1>
+          <Button
+            asChild
+            variant="outline"
+            className="hidden lg:flex border-white/20 text-white hover:bg-white/10"
+          >
+            <Link href="/dashboard" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Dashboard
+            </Link>
+          </Button>
+        </div>
         <p className="text-gray-400">
           Manage your account settings and preferences
         </p>

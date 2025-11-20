@@ -200,16 +200,6 @@ export function ProfileForm({ user, profile: initialProfile }: ProfileFormProps)
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      {/* Back Button - Desktop only - Hidden for Super Admin */}
-      {initialProfile?.role !== 'super_admin' && (
-        <Button asChild variant="ghost" className="text-white hover:bg-white/10 h-9 hidden lg:inline-flex">
-          <Link href={initialProfile?.role === 'admin' ? "/admin" : "/dashboard"}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
-          </Link>
-        </Button>
-      )}
-
       {/* Profile Overview Card */}
       <Card className="bg-white/5 backdrop-blur-sm border-white/10">
         <CardHeader>

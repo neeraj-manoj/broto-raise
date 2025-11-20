@@ -268,14 +268,19 @@ export function ComplaintForm({ userId, userLocation }: ComplaintFormProps) {
     <div className="space-y-4 md:space-y-6">
       {/* Header */}
       <div>
-        <Button asChild variant="ghost" className="text-white hover:bg-white/10 mb-4 h-9 px-3">
-          <Link href="/dashboard">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            <span className="hidden sm:inline">Back to Dashboard</span>
-            <span className="sm:hidden">Back</span>
-          </Link>
-        </Button>
-        <h1 className="text-3xl md:text-4xl font-black font-mono mb-2">New Complaint</h1>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-3xl md:text-4xl font-black font-mono">New Complaint</h1>
+          <Button
+            asChild
+            variant="outline"
+            className="hidden lg:flex border-white/20 text-white hover:bg-white/10"
+          >
+            <Link href="/dashboard" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Dashboard
+            </Link>
+          </Button>
+        </div>
         <p className="text-gray-400 text-sm md:text-base">
           Report your concern and we'll address it promptly
         </p>
