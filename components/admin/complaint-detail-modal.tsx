@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { formatDistanceToNow, format } from 'date-fns'
-import { X, Download, FileText, Image as ImageIcon, UserCheck, MapPin, Calendar, Clock, Ban, CheckCircle2, Eye, MessageSquare, Sparkles, Wand2, Undo2 } from 'lucide-react'
+import { X, Download, FileText, Image as ImageIcon, UserCheck, MapPin, Calendar, Clock, Ban, CheckCircle2, Eye, MessageSquare, Sparkles, Wand2, Undo2, ThumbsUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
@@ -350,7 +350,7 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange, onUpdate }
                   </Button>
                 </div>
               )}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {currentComplaint.location && (
                   <div className="flex items-center gap-2 text-gray-400">
                     <MapPin className="h-4 w-4" />
@@ -358,13 +358,17 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange, onUpdate }
                   </div>
                 )}
                 <div className="flex items-center gap-2 text-gray-400">
+                  <Clock className="h-4 w-4" />
+                  <span><span className="text-white">{formatDistanceToNow(new Date(currentComplaint.created_at), { addSuffix: true })}</span></span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-400">
                   <Calendar className="h-4 w-4" />
                   <span>Created: <span className="text-white">{format(new Date(currentComplaint.created_at), 'MMM dd, yyyy')}</span></span>
                 </div>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400">
-                <Clock className="h-4 w-4" />
-                <span><span className="text-white">{formatDistanceToNow(new Date(currentComplaint.created_at), { addSuffix: true })}</span></span>
+                <div className="flex items-center gap-2 text-gray-400">
+                  <ThumbsUp className="h-4 w-4" />
+                  <span>Upvotes: <span className="text-white">{currentComplaint.upvotes_count || 0}</span></span>
+                </div>
               </div>
             </div>
 

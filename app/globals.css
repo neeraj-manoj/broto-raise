@@ -120,50 +120,15 @@
     @apply bg-background text-foreground;
   }
 
-  /* Custom scrollbar styling for Black/White/Blue theme */
-  /* Hide scrollbar on mobile, show on desktop */
+  /* Hide scrollbar entirely while maintaining scroll functionality */
   ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 0px;
+    height: 0px;
   }
 
-  @media (max-width: 1023px) {
-    ::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-    }
-
-    * {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #000000;
-    border-left: 1px solid rgba(59, 130, 246, 0.1);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 100%);
-    border-radius: 6px;
-    border: 2px solid #000000;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #2563eb 0%, #60a5fa 100%);
-  }
-
-  /* Firefox scrollbar */
   * {
-    scrollbar-width: thin;
-    scrollbar-color: #3b82f6 #000000;
-  }
-
-  @media (max-width: 1023px) {
-    * {
-      scrollbar-width: none;
-    }
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   /* Sonner Toast Customization */

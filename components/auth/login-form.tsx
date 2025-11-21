@@ -40,6 +40,7 @@ export function LoginForm() {
 
       if (signInError) {
         setError(signInError.message)
+        setIsLoading(false)
         return
       }
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { formatDistanceToNow, format } from 'date-fns'
-import { Download, FileText, Image as ImageIcon, MapPin, Calendar, Clock } from 'lucide-react'
+import { Download, FileText, Image as ImageIcon, MapPin, Calendar, Clock, ThumbsUp } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import {
   Dialog,
@@ -167,12 +167,16 @@ export function ComplaintViewModal({ complaintId, open, onOpenChange }: Complain
               </div>
             )}
             <div className="flex items-center gap-2 text-gray-400">
+              <Clock className="h-4 w-4 flex-shrink-0" />
+              <span className={isMobile ? 'text-xs' : ''}><span className="text-white">{formatDistanceToNow(new Date(complaint.created_at), { addSuffix: true })}</span></span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400">
               <Calendar className="h-4 w-4 flex-shrink-0" />
               <span className={isMobile ? 'text-xs' : ''}>Created: <span className="text-white">{format(new Date(complaint.created_at), 'MMM dd, yyyy')}</span></span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
-              <Clock className="h-4 w-4 flex-shrink-0" />
-              <span className={isMobile ? 'text-xs' : ''}><span className="text-white">{formatDistanceToNow(new Date(complaint.created_at), { addSuffix: true })}</span></span>
+              <ThumbsUp className="h-4 w-4 flex-shrink-0" />
+              <span className={isMobile ? 'text-xs' : ''}>Upvotes: <span className="text-white">{complaint.upvotes_count || 0}</span></span>
             </div>
           </div>
 
