@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Loader2, CheckCircle2, Eye, EyeOff } from 'lucide-react'
+import { Loader2, CheckCircle2, Eye, EyeOff, Info } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function LoginForm() {
@@ -18,6 +18,8 @@ export function LoginForm() {
   const [isRedirecting, setIsRedirecting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showResetDialog, setShowResetDialog] = useState(false)
+  const [showGithubInfoDialog, setShowGithubInfoDialog] = useState(false)
+  const [infoDialogType, setInfoDialogType] = useState<null | 'not_registered' | 'wrong_password'>(null)
   const [resetStatus, setResetStatus] = useState<'loading' | 'success' | 'error'>('loading')
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
@@ -39,7 +41,27 @@ export function LoginForm() {
       })
 
       if (signInError) {
-        setError(signInError.message)
+        // Check whether the email exists in our profiles table to give a better error
+        try {
+          const { data: existingProfile, error: profileError } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('email', formData.email)
+            .single()
+
+          if (!existingProfile) {
+            setError('This email is not registered. Please register first or check the email you entered.')
+            setInfoDialogType('not_registered')
+          } else {
+            // The email exists — most likely wrong password or the user signed up via OAuth and never set a password
+            setError('Wrong password')
+            setInfoDialogType('wrong_password')
+          }
+        } catch (err) {
+          // Fallback to generic message
+          setError(signInError.message)
+        }
+
         setIsLoading(false)
         return
       }
@@ -111,7 +133,19 @@ export function LoginForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <Alert variant="destructive" className="bg-red-500/10 border-red-500/30 text-red-400">
-              <AlertDescription>{error}</AlertDescription>
+              <AlertDescription className="flex items-center justify-between">
+                <span>{error}</span>
+                {(infoDialogType === 'not_registered' || infoDialogType === 'wrong_password') && (
+                  <button
+                    type="button"
+                    onClick={() => setShowGithubInfoDialog(true)}
+                    className="ml-2 p-1 hover:bg-red-500/20 rounded-full transition-colors"
+                    title="Trouble logging in?"
+                  >
+                    <Info className="h-4 w-4" />
+                  </button>
+                )}
+              </AlertDescription>
             </Alert>
           )}
 
@@ -282,6 +316,50 @@ export function LoginForm() {
               </Button>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* GitHub Login Info Dialog */}
+      <Dialog open={showGithubInfoDialog} onOpenChange={setShowGithubInfoDialog}>
+        <DialogContent className="bg-gray-900 border-white/10 text-white sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-center font-mono">Trouble Logging In?</DialogTitle>
+              <DialogDescription className="text-center text-gray-400">
+                {infoDialogType === 'not_registered' ? (
+                  'This email is not registered. Please register first or verify the email you entered.'
+                ) : (
+                  'There was a problem signing in. Below are ways to resolve it depending on your account type.'
+                )}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="space-y-4 py-4">
+              {infoDialogType === 'not_registered' ? (
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 text-sm text-blue-200">
+                  <p className="mb-2 font-semibold">What to do next</p>
+                  <ol className="list-decimal list-inside space-y-2 text-blue-200/80">
+                    <li>Please register for an account first and then try logging in.</li>
+                    <li>If you already registered, double-check that the email you entered is correct.</li>
+                  </ol>
+                </div>
+              ) : (
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 text-sm text-blue-200">
+                  <p className="mb-2 font-semibold">Possible fixes</p>
+                  <ol className="list-decimal list-inside space-y-2 text-blue-200/80">
+                    <li>If you forgot your password, click <strong>Forgot password?</strong> to reset it.</li>
+                    <li>If you signed up using <strong>GitHub</strong> and never set a password, login with GitHub and go to <strong>Profile Settings → Set Password</strong> to create one.</li>
+                    <li>Ensure the email you entered is the one associated with your account.</li>
+                  </ol>
+                </div>
+              )}
+
+              <Button
+                onClick={() => setShowGithubInfoDialog(false)}
+                className="w-full bg-white text-black hover:bg-gray-200"
+              >
+                Got it
+              </Button>
+            </div>
         </DialogContent>
       </Dialog>
     </Card>
