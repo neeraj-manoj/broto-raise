@@ -102,14 +102,10 @@ export function ComplaintsList({
         if (error) throw error
       }
 
-      // Clear optimistic update after success
-      setOptimisticUpdates(prev => {
-        const { [complaintId]: _, ...rest } = prev
-        return rest
-      })
-      
-      // Refresh server data to get updated count
-      router.refresh()
+      // Wait a bit for the database trigger to update the count, then refresh
+      setTimeout(() => {
+        router.refresh()
+      }, 500)
     } catch (error: any) {
       console.error('Upvote error:', error)
       // Revert on error
@@ -341,6 +337,12 @@ function ComplaintCard({
                 <Clock className="w-3 h-3" />
                 {formatDistanceToNow(new Date(complaint.created_at), { addSuffix: true })}
               </span>
+              {mode === 'personal' && (
+                <span className="flex items-center gap-1 font-mono text-blue-400">
+                  <ThumbsUp className="w-3 h-3" />
+                  {complaint.upvotes_count || 0} {complaint.upvotes_count === 1 ? 'upvote' : 'upvotes'}
+                </span>
+              )}
             </div>
           </div>
 

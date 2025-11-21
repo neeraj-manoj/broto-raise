@@ -27,7 +27,7 @@ export default async function DashboardPage() {
     // Let's assume location is required.
   }
 
-  // Get community complaints (non-anonymous, same location)
+  // Get community complaints (non-anonymous, same location, exclude own complaints)
   const { data: complaints } = await supabase
     .from('complaints')
     .select(`
@@ -40,6 +40,7 @@ export default async function DashboardPage() {
     `)
     .eq('location_id', profile?.location_id)
     .eq('is_anonymous', false)
+    .neq('created_by', user.id) // Exclude own complaints
     .order('created_at', { ascending: false })
 
   // Get user's upvotes

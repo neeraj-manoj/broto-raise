@@ -1,7 +1,7 @@
 'use client'
 
 import { formatDistanceToNow, format } from 'date-fns'
-import { Download, FileText, Image as ImageIcon, Calendar, Clock, MessageSquare, X } from 'lucide-react'
+import { Download, FileText, Image as ImageIcon, Calendar, Clock, MessageSquare, X, ThumbsUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -175,6 +175,12 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange }: Complain
                       <span className="text-white block">{formatDistanceToNow(new Date(complaint.created_at), { addSuffix: true })}</span>
                     </span>
                   </div>
+                  <div className="flex items-center gap-2 text-blue-400">
+                    <ThumbsUp className="h-4 w-4 flex-shrink-0" />
+                    <span className="text-xs">
+                      <span className="text-white block">{complaint.upvotes_count || 0} {complaint.upvotes_count === 1 ? 'upvote' : 'upvotes'}</span>
+                    </span>
+                  </div>
                 </div>
 
                 {/* Description */}
@@ -324,6 +330,10 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange }: Complain
                 <div className="flex items-center gap-2 text-gray-400">
                   <Clock className="h-4 w-4" />
                   <span><span className="text-white">{formatDistanceToNow(new Date(complaint.created_at), { addSuffix: true })}</span></span>
+                </div>
+                <div className="flex items-center gap-2 text-blue-400">
+                  <ThumbsUp className="h-4 w-4" />
+                  <span><span className="text-white">{complaint.upvotes_count || 0} {complaint.upvotes_count === 1 ? 'upvote' : 'upvotes'}</span></span>
                 </div>
               </div>
 
