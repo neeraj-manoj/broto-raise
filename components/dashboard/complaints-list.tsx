@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { formatDistanceToNow } from 'date-fns'
 import { Eye, Filter, Search, ThumbsUp, User, Clock, MessageSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -33,6 +34,7 @@ export function ComplaintsList({
   userUpvotedIds = [],
   currentUserId
 }: ComplaintsListProps) {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
   const [categoryFilter, setCategoryFilter] = useState('all')
@@ -55,10 +57,15 @@ export function ComplaintsList({
     e.stopPropagation()
     if (!currentUserId) return
 
+    // Prevent self-upvoting
+    const currentComplaint = complaints.find(c => c.id === complaintId)
+    if (currentComplaint?.created_by === currentUserId) {
+      toast.error("You can't upvote your own complaint")
+      return
+    }
+
     const isUpvoted = upvotedIds.has(complaintId)
     const supabase = createClient()
-
-    const currentComplaint = complaints.find(c => c.id === complaintId)
     const currentCount = currentComplaint?.upvotes_count || 0
 
     // Optimistic update
@@ -100,15 +107,25 @@ export function ComplaintsList({
         const { [complaintId]: _, ...rest } = prev
         return rest
       })
-    } catch (error) {
+      
+      // Refresh server data to get updated count
+      router.refresh()
+    } catch (error: any) {
       console.error('Upvote error:', error)
       // Revert on error
-      setUpvotedIds(upvotedIds)
+      const revertedIds = new Set(upvotedIds)
+      setUpvotedIds(revertedIds)
       setOptimisticUpdates(prev => {
         const { [complaintId]: _, ...rest } = prev
         return rest
       })
-      toast.error('Failed to update vote')
+      
+      // Check for specific error types
+      if (error?.code === '23505') {
+        toast.error('Already upvoted')
+      } else {
+        toast.error('Failed to update vote')
+      }
     }
   }
 
