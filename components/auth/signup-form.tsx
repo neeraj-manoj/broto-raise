@@ -59,7 +59,11 @@ export function SignupForm() {
       })
 
       if (signUpError) {
-        setError(signUpError.message)
+        if (signUpError.message.includes('already registered') || signUpError.message.includes('User already exists')) {
+          setError('This email is already registered. Please try logging in instead.')
+        } else {
+          setError(signUpError.message)
+        }
         return
       }
 

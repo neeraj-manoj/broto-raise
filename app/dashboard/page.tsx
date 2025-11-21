@@ -22,9 +22,7 @@ export default async function DashboardPage() {
     .single()
 
   if (!profile?.location_id) {
-    // Handle case where user has no location (maybe redirect to profile setup?)
-    // For now, we'll just show empty state or all public complaints?
-    // Let's assume location is required.
+    redirect('/auth/complete-profile')
   }
 
   // Get community complaints (non-anonymous, same location, exclude own complaints)
