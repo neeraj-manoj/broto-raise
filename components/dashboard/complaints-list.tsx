@@ -66,7 +66,37 @@ export function ComplaintsList({
 
     const isUpvoted = upvotedIds.has(complaintId)
     const supabase = createClient()
-    const currentCount = currentComplaint?.upvotes_count || 0
+    
+    // Calculate optimistic count
+    // We need to know if the user was originally upvoted to determine the base count
+    const wasOriginallyUpvoted = userUpvotedIds.includes(complaintId)
+    const originalCount = currentComplaint?.upvotes_count || 0
+    const willBeUpvoted = !isUpvoted // The new state we are transitioning to
+
+    let newCount = originalCount
+
+    if (willBeUpvoted) {
+        // We want to be upvoted.
+        if (wasOriginallyUpvoted) {
+             // We were originally upvoted, so originalCount is correct (assuming data is fresh).
+             newCount = originalCount
+        } else {
+             // We were not originally upvoted, so add 1.
+             newCount = originalCount + 1
+        }
+    } else {
+        // We want to NOT be upvoted.
+        if (wasOriginallyUpvoted) {
+            // We were originally upvoted, so remove 1.
+            newCount = originalCount - 1
+        } else {
+            // We were not originally upvoted, so originalCount is correct.
+            newCount = originalCount
+        }
+    }
+    
+    // Ensure count doesn't go below 0
+    newCount = Math.max(0, newCount)
 
     // Optimistic update
     const newUpvotedIds = new Set(upvotedIds)
@@ -79,7 +109,7 @@ export function ComplaintsList({
 
     setOptimisticUpdates(prev => ({
       ...prev,
-      [complaintId]: currentCount + (isUpvoted ? -1 : 1)
+      [complaintId]: newCount
     }))
 
     try {
@@ -118,9 +148,9 @@ export function ComplaintsList({
 
       // Check for specific error types
       if (error?.code === '23505') {
-        toast.error('Already upvoted')
+        toast.error('You have already upvoted this complaint')
       } else {
-        toast.error('Failed to update vote')
+        toast.error('Failed to update upvote')
       }
     }
   }
@@ -351,7 +381,7 @@ function ComplaintCard({
             <Button
               variant="ghost"
               size="sm"
-              className={`flex flex-col items-center gap-1 h-auto py-2 px-3 hover:bg-blue-500/10 ${
+              className={`flex flex-col items-center gap-1 h-auto py-2 px-3 hover:bg-blue-500/10 border-none ring-0 focus:ring-0 focus-visible:ring-0 outline-none ${
                 isUpvoted ? 'text-blue-400' : 'text-gray-500'
               }`}
               onClick={onUpvote}
