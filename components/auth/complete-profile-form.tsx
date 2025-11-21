@@ -100,15 +100,15 @@ export function CompleteProfileForm() {
   }
 
   return (
-    <Card className="bg-white/5 backdrop-blur-sm border-white/10 w-full max-w-md mx-auto">
+    <Card className="bg-black/30 backdrop-blur-xl border-white/10 shadow-2xl w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="font-mono text-white">Complete Your Profile</CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardTitle className="font-mono text-white text-2xl text-center">Complete Profile</CardTitle>
+        <CardDescription className="text-gray-400 text-center">
           Please select your location and set a password to continue.
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
             <Alert variant="destructive" className="bg-red-500/10 border-red-500/20 text-red-400">
               <AlertDescription>{error}</AlertDescription>
@@ -116,17 +116,17 @@ export function CompleteProfileForm() {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="location">Brocamp Location</Label>
+            <Label htmlFor="location" className="text-gray-300">Brocamp Location</Label>
             <Select
               value={formData.location}
               onValueChange={(value) => setFormData({ ...formData, location: value })}
             >
-              <SelectTrigger className="bg-black/20 border-white/10 text-white">
+              <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-blue-500 h-11">
                 <SelectValue placeholder="Select your location" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-gray-900 border-white/10 text-white">
                 {BROCAMP_LOCATIONS.map((location) => (
-                  <SelectItem key={location.id} value={location.id}>
+                  <SelectItem key={location.id} value={location.id} className="focus:bg-blue-500/20 focus:text-white">
                     {location.name}
                   </SelectItem>
                 ))}
@@ -143,7 +143,7 @@ export function CompleteProfileForm() {
                 placeholder="Create a password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="bg-black/20 border-white/10 text-white pr-10"
+                className="bg-white/5 border-white/10 text-white pr-10 h-11 focus:border-blue-500"
               />
               <button
                 type="button"
@@ -173,7 +173,7 @@ export function CompleteProfileForm() {
                   placeholder="Confirm your password"
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="bg-black/20 border-white/10 text-white pr-10"
+                  className="bg-white/5 border-white/10 text-white pr-10 h-11 focus:border-blue-500"
                 />
                 <button
                   type="button"
@@ -193,7 +193,7 @@ export function CompleteProfileForm() {
 
           <Button
             type="submit"
-            className="w-full bg-white text-black hover:bg-gray-200"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white h-11 font-medium"
             disabled={isLoading}
           >
             {isLoading ? (
