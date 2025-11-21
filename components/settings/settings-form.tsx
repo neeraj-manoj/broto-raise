@@ -34,7 +34,7 @@ export function SettingsForm({ user, profile, locations = [], isAdmin = false }:
   // Check if user has a password set (if they have 'email' provider)
   // Note: This is a heuristic. If they signed up with GitHub and never set a password,
   // providers will only contain 'github'. If they set a password, 'email' is usually added.
-  const hasPassword = user?.app_metadata?.providers?.includes('email')
+  const hasPassword = user?.app_metadata?.providers?.includes('email') || user?.user_metadata?.has_password
 
   const [formData, setFormData] = useState({
     full_name: profile?.full_name || '',
@@ -125,6 +125,7 @@ export function SettingsForm({ user, profile, locations = [], isAdmin = false }:
 
       const { error } = await supabase.auth.updateUser({
         password: passwordData.newPassword,
+        data: { has_password: true }
       })
 
       if (error) throw error

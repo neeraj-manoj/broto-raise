@@ -73,7 +73,8 @@ export function CompleteProfileForm() {
       // Update password if provided
       if (formData.password) {
         const { error: passwordError } = await supabase.auth.updateUser({
-          password: formData.password
+          password: formData.password,
+          data: { has_password: true }
         })
 
         if (passwordError) {
