@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Loader2, User, Mail, MapPin, Phone, Save } from 'lucide-react'
+import { ArrowLeft, Loader2, User, Mail, MapPin, Phone, Save, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -28,6 +28,13 @@ export function SettingsForm({ user, profile, locations = [], isAdmin = false }:
   const router = useRouter()
   const [isSaving, setIsSaving] = useState(false)
   const [isChangingPassword, setIsChangingPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+  // Check if user has a password set (if they have 'email' provider)
+  // Note: This is a heuristic. If they signed up with GitHub and never set a password,
+  // providers will only contain 'github'. If they set a password, 'email' is usually added.
+  const hasPassword = user?.app_metadata?.providers?.includes('email')
 
   const [formData, setFormData] = useState({
     full_name: profile?.full_name || '',
@@ -240,40 +247,70 @@ export function SettingsForm({ user, profile, locations = [], isAdmin = false }:
         </form>
       </div>
 
-      {/* Change Password */}
+      {/* Change/Set Password */}
       <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-8">
-        <h2 className="text-2xl font-bold font-mono mb-2">Change Password</h2>
+        <h2 className="text-2xl font-bold font-mono mb-2">
+          {hasPassword ? 'Change Password' : 'Set Password'}
+        </h2>
         <p className="text-gray-400 text-sm mb-6">
-          Update your password to keep your account secure
+          {hasPassword 
+            ? 'Update your password to keep your account secure' 
+            : 'Set a password to enable email/password login in addition to GitHub login'}
         </p>
 
         <form onSubmit={handleChangePassword} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="new_password" className="text-gray-300">
-              New Password
+              {hasPassword ? 'New Password' : 'Password'}
             </Label>
-            <Input
-              id="new_password"
-              type="password"
-              value={passwordData.newPassword}
-              onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
-              className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500"
-              placeholder="Enter new password"
-            />
+            <div className="relative">
+              <Input
+                id="new_password"
+                type={showNewPassword ? 'text' : 'password'}
+                value={passwordData.newPassword}
+                onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 pr-10"
+                placeholder={hasPassword ? "Enter new password" : "Create a password"}
+              />
+              <button
+                type="button"
+                onClick={() => setShowNewPassword(!showNewPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+              >
+                {showNewPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="confirm_password" className="text-gray-300">
-              Confirm New Password
+              {hasPassword ? 'Confirm New Password' : 'Confirm Password'}
             </Label>
-            <Input
-              id="confirm_password"
-              type="password"
-              value={passwordData.confirmPassword}
-              onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
-              className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500"
-              placeholder="Confirm new password"
-            />
+            <div className="relative">
+              <Input
+                id="confirm_password"
+                type={showConfirmPassword ? 'text' : 'password'}
+                value={passwordData.confirmPassword}
+                onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 pr-10"
+                placeholder={hasPassword ? "Confirm new password" : "Confirm your password"}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+              >
+                {showConfirmPassword ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+              </button>
+            </div>
           </div>
 
           <Button
@@ -284,10 +321,10 @@ export function SettingsForm({ user, profile, locations = [], isAdmin = false }:
             {isChangingPassword ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Changing Password...
+                {hasPassword ? 'Changing Password...' : 'Setting Password...'}
               </>
             ) : (
-              'Change Password'
+              hasPassword ? 'Change Password' : 'Set Password'
             )}
           </Button>
         </form>
