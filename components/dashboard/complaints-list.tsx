@@ -115,7 +115,7 @@ export function ComplaintsList({
         const { [complaintId]: _, ...rest } = prev
         return rest
       })
-      
+
       // Check for specific error types
       if (error?.code === '23505') {
         toast.error('Already upvoted')

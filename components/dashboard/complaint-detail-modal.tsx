@@ -45,10 +45,10 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange }: Complain
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
-    
+
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    
+
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
@@ -139,7 +139,7 @@ export function ComplaintDetailModal({ complaint, open, onOpenChange }: Complain
                 <DrawerTitle className="text-xl font-bold font-mono text-white text-left leading-tight pr-8">
                   {complaint.title}
                 </DrawerTitle>
-                
+
                 {/* Badges */}
                 <div className="flex items-center gap-2 flex-wrap">
                   <Badge className={`${statusColors[complaint.status as keyof typeof statusColors]} font-mono text-xs`}>

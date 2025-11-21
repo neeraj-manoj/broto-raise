@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
         // Log user metadata to debug avatar issue
         console.log('User metadata:', JSON.stringify(user.user_metadata, null, 2))
         console.log('Avatar URL:', user.user_metadata?.avatar_url)
-        
+
         // Check if profile exists, if not create one
         const { data: profile } = await supabase
           .from('profiles')
@@ -32,20 +32,20 @@ export async function GET(request: NextRequest) {
         if (!profile) {
           // Create profile for new OAuth user
           // Try multiple possible avatar field names from GitHub
-          const avatarUrl = user.user_metadata?.avatar_url || 
-                           user.user_metadata?.picture || 
+          const avatarUrl = user.user_metadata?.avatar_url ||
+                           user.user_metadata?.picture ||
                            user.user_metadata?.avatar ||
                            null
-          
+
           console.log('Saving avatar URL:', avatarUrl)
-          
+
           await supabase
             .from('profiles')
             .insert({
               id: user.id,
               email: user.email || '',
-              full_name: user.user_metadata?.full_name || 
-                        user.user_metadata?.name || 
+              full_name: user.user_metadata?.full_name ||
+                        user.user_metadata?.name ||
                         user.email?.split('@')[0] || 'User',
               role: 'student',
               avatar_url: avatarUrl
@@ -55,11 +55,11 @@ export async function GET(request: NextRequest) {
           return NextResponse.redirect(`${origin}/dashboard`)
         } else {
           // Update avatar if it's not set and GitHub provides one
-          const avatarUrl = user.user_metadata?.avatar_url || 
-                           user.user_metadata?.picture || 
+          const avatarUrl = user.user_metadata?.avatar_url ||
+                           user.user_metadata?.picture ||
                            user.user_metadata?.avatar ||
                            null
-          
+
           if (!profile.avatar_url && avatarUrl) {
             await supabase
               .from('profiles')
