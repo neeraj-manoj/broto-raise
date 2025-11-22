@@ -58,6 +58,7 @@ ${featureBank}
 Return ONLY 4 questions, one per line, no numbering.`
 
   const models = [
+    'microsoft/Phi-3.5-mini-instruct',
     'meta-llama/Llama-3.1-8B-Instruct',
     'Qwen/Qwen2.5-7B-Instruct',
   ]

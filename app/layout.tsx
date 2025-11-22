@@ -44,9 +44,10 @@ export default function RootLayout({
       <body className={`${lexend.variable} ${lexendGiga.variable} font-sans`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
+          forcedTheme="dark"
         >
           {children}
           <SpeedInsights />

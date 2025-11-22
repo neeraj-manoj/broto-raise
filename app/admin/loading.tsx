@@ -3,7 +3,7 @@ export default function AdminLoading() {
     <main className="container mx-auto px-4 py-8 pb-24 lg:pb-8">
       <div className="mb-8">
         <div className="h-10 w-48 bg-white/5 rounded animate-pulse mb-2" />
-        <div className="h-5 w-96 bg-white/5 rounded animate-pulse" />
+        <div className="h-5 w-full max-w-md bg-white/5 rounded animate-pulse" />
       </div>
 
       {/* Stats Skeleton */}

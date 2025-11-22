@@ -41,9 +41,10 @@ async function generateMetadata(
       })
 
       const models = [
+        'microsoft/Phi-3.5-mini-instruct',
         'meta-llama/Llama-3.1-8B-Instruct',
-        'Qwen/Qwen2.5-7B-Instruct',
-        'mistralai/Mistral-7B-Instruct-v0.3'
+        'mistralai/Mistral-7B-Instruct-v0.3',
+        'Qwen/Qwen2.5-7B-Instruct'
       ]
 
       const systemPrompt = `You are an AI that categorizes student complaints for a complaint management system.

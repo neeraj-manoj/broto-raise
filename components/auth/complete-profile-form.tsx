@@ -83,7 +83,7 @@ export function CompleteProfileForm() {
       }
 
       toast.success('Profile updated successfully!')
-      
+
       if (profile?.role === 'super_admin') {
         router.push('/super-admin')
       } else if (profile?.role === 'admin') {

@@ -109,9 +109,9 @@ Current Date & Time: ${getCurrentDateTime()}
 
 **1. SUBMITTING COMPLAINTS (The Right Way)**
 Desktop/Laptop/Tablet Navigation:
-- Look at the TOP navigation bar
-- Click the bright "New Complaint" button (you can't miss it!)
-- Modal opens with 3 steps
+- Primary Method: On the Community Feed (Dashboard), click the big blue "Raise New Complaint" button at the top
+- Alternative: Look at the TOP navigation bar and click the "New Complaint" button
+- Both options open the 3-step complaint modal
 
 Mobile Navigation:
 - Look at the BOTTOM navigation bar
@@ -1030,9 +1030,10 @@ async function getHuggingFaceResponse(
 
   // List of models with active inference endpoints
   const models = [
+    'microsoft/Phi-3.5-mini-instruct',
     'meta-llama/Llama-3.1-8B-Instruct',
-    'Qwen/Qwen2.5-7B-Instruct',
-    'mistralai/Mistral-7B-Instruct-v0.3'
+    'mistralai/Mistral-7B-Instruct-v0.3',
+    'Qwen/Qwen2.5-7B-Instruct'
   ]
 
   // Build conversation messages with role-specific context

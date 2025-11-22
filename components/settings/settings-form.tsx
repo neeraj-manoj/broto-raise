@@ -254,8 +254,8 @@ export function SettingsForm({ user, profile, locations = [], isAdmin = false }:
           {hasPassword ? 'Change Password' : 'Set Password'}
         </h2>
         <p className="text-gray-400 text-sm mb-6">
-          {hasPassword 
-            ? 'Update your password to keep your account secure' 
+          {hasPassword
+            ? 'Update your password to keep your account secure'
             : 'Set a password to enable email/password login in addition to GitHub login'}
         </p>
 

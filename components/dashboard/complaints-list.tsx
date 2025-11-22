@@ -66,7 +66,7 @@ export function ComplaintsList({
 
     const isUpvoted = upvotedIds.has(complaintId)
     const supabase = createClient()
-    
+
     // Calculate optimistic count
     // We need to know if the user was originally upvoted to determine the base count
     const wasOriginallyUpvoted = userUpvotedIds.includes(complaintId)
@@ -94,7 +94,7 @@ export function ComplaintsList({
             newCount = originalCount
         }
     }
-    
+
     // Ensure count doesn't go below 0
     newCount = Math.max(0, newCount)
 
