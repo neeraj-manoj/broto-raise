@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { COMPLAINT_CATEGORIES } from '@/lib/constants'
+import { COMPLAINT_CATEGORIES, BROCAMP_LOCATIONS } from '@/lib/constants'
 import { ComplaintDetailModal } from './complaint-detail-modal'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
@@ -32,24 +32,6 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
   const [priorityFilter, setPriorityFilter] = useState('all')
   const [locationFilter, setLocationFilter] = useState('all')
   const [sortBy, setSortBy] = useState('newest')
-  const [locations, setLocations] = useState<any[]>([])
-
-  // Fetch all locations from database
-  useEffect(() => {
-    const fetchLocations = async () => {
-      const supabase = createClient()
-      const { data, error } = await supabase
-        .from('locations')
-        .select('*')
-        .order('city', { ascending: true })
-
-      if (!error && data) {
-        setLocations(data)
-      }
-    }
-
-    fetchLocations()
-  }, [])
 
   // Filter and sort complaints
   const filteredAndSortedComplaints = complaints.filter(complaint => {
@@ -163,9 +145,9 @@ export function AdminComplaintsList({ complaints }: AdminComplaintsListProps) {
             </SelectTrigger>
             <SelectContent className="bg-gray-900 border-white/10">
               <SelectItem value="all" className="text-white focus:bg-blue-500/20">All Locations</SelectItem>
-              {locations.map((location) => (
+              {BROCAMP_LOCATIONS.map((location) => (
                 <SelectItem key={location.id} value={location.id} className="text-white focus:bg-blue-500/20">
-                  {location.name}, {location.city}
+                  {location.name}
                 </SelectItem>
               ))}
             </SelectContent>

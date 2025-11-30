@@ -495,12 +495,15 @@ Why It's Different:
 
 **📍 BROCAMP LOCATIONS (6 CENTERS):**
 
-1. **Trivandrum (TVM)** - Capital city campus
-2. **Kochi (KOC)** - Commercial hub
-3. **Calicut (CLT)** - Malabar region
-4. **Kannur (KNR)** - Northern Kerala
-5. **Bangalore (BLR)** - Tech capital expansion
-6. **Thrissur (TRS)** - Cultural heart
+Kerala Locations:
+1. **Kochi (KOC)** - Headquarters
+2. **Kozhikode/Calicut (KZD)** - Malabar region
+3. **Trivandrum (TVM)** - Capital city
+
+Other South Indian Locations:
+4. **Bengaluru (BLR)** - Karnataka, Tech capital
+5. **Coimbatore (CBE)** - Tamil Nadu
+6. **Chennai (CHE)** - Tamil Nadu
 
 Each location has:
 - Dedicated working hubs
@@ -770,12 +773,12 @@ function getTemplateResponse(message: string, userRole: string = 'student', user
 
   // === ABOUT BROCAMP ===
   if (/(what|tell|about).*(brocamp|program|course|training)|brocamp.*(what|about)/i.test(message)) {
-    return `Brocamp is Brototype's intensive 12-month software engineering bootcamp! You learn full-stack development (React, Node.js, databases, etc.) through hands-on projects. Available both in-house and online with the same quality. Best part? Income Share Agreement model - pay after you're placed! 💼 With 2,250+ successful placements averaging ₹39K/month, it's designed to make you industry-ready. Currently running across 6 locations: Trivandrum, Kochi, Calicut, Kannur, Bangalore, and Thrissur!`
+    return `Brocamp is Brototype's intensive 12-month software engineering bootcamp! You learn full-stack development (React, Node.js, databases, etc.) through hands-on projects. Available both in-house and online with the same quality. Best part? Income Share Agreement model - pay after you're placed! 💼 With 2,250+ successful placements averaging ₹39K/month, it's designed to make you industry-ready. Currently running across 6 locations in South India: Kerala (Kochi, Kozhikode, Trivandrum), Karnataka (Bengaluru), and Tamil Nadu (Coimbatore, Chennai)!`
   }
 
   // === BROCAMP LOCATIONS ===
   if (/(where|which|list).*(brocamp|location|center|campus)|location.*(brocamp|available)/i.test(message)) {
-    return `Brocamp has 6 centers across South India! 📍\n\n🏢 **Kerala**: Trivandrum (TVM), Kochi (KOC), Calicut (CLT), Kannur (KNR), Thrissur (TRS)\n🏢 **Karnataka**: Bangalore (BLR)\n\nEach location has full facilities - working hubs, mentor support, admin staff, and everything you need for the 12-month journey! Which location are you interested in?`
+    return `Brocamp has 6 centers across South India! 📍\n\n🏢 **Kerala**: Kochi (KOC), Kozhikode/Calicut (KZD), Trivandrum (TVM)\n🏢 **Karnataka**: Bengaluru (BLR)\n🏢 **Tamil Nadu**: Coimbatore (CBE), Chennai (CHE)\n\nEach location has full facilities - working hubs, mentor support, admin staff, and everything you need for the 12-month journey! Which location are you interested in?`
   }
 
   // === HOW TO SUBMIT COMPLAINT ===

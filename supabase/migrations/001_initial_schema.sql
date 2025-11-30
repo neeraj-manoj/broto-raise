@@ -78,12 +78,12 @@ CREATE TABLE IF NOT EXISTS notifications (
 
 -- Insert Brocamp locations
 INSERT INTO locations (id, name, city, state) VALUES
-  ('kochi', 'Brocamp Kochi', 'Kochi', 'Kerala'),
-  ('calicut', 'Brocamp Calicut', 'Calicut', 'Kerala'),
-  ('kannur', 'Brocamp Kannur', 'Kannur', 'Kerala'),
-  ('trivandrum', 'Brocamp Trivandrum', 'Trivandrum', 'Kerala'),
-  ('bangalore', 'Brocamp Bangalore', 'Bangalore', 'Karnataka'),
-  ('mumbai', 'Brocamp Mumbai', 'Mumbai', 'Maharashtra')
+  ('kochi', 'Kochi (Headquarters)', 'Kochi', 'Kerala'),
+  ('kozhikode', 'Kozhikode (Calicut)', 'Kozhikode', 'Kerala'),
+  ('trivandrum', 'Trivandrum', 'Trivandrum', 'Kerala'),
+  ('bengaluru', 'Bengaluru', 'Bengaluru', 'Karnataka'),
+  ('coimbatore', 'Coimbatore', 'Coimbatore', 'Tamil Nadu'),
+  ('chennai', 'Chennai', 'Chennai', 'Tamil Nadu')
 ON CONFLICT (id) DO NOTHING;
 
 -- Create function to handle profile creation

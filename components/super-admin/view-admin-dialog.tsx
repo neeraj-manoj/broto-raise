@@ -102,7 +102,7 @@ export function ViewAdminDialog({ admin, open, onOpenChange }: ViewAdminDialogPr
                   <div>
                     <div className="text-xs text-gray-500">Location</div>
                     <div className="text-white">
-                      {admin.location.name}, {admin.location.city}
+                      {admin.location.name}
                     </div>
                   </div>
                 </div>

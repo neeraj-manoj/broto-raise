@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Loader2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
+import { BROCAMP_LOCATIONS } from '@/lib/constants'
 
 interface Location {
   id: string
@@ -34,36 +35,14 @@ interface EditAdminDialogProps {
 export function EditAdminDialog({ admin, open, onOpenChange, onSuccess }: EditAdminDialogProps) {
   const [fullName, setFullName] = useState(admin.full_name)
   const [locationId, setLocationId] = useState(admin.location_id)
-  const [locations, setLocations] = useState<Location[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [isLoadingLocations, setIsLoadingLocations] = useState(false)
 
   useEffect(() => {
     if (open) {
       setFullName(admin.full_name)
       setLocationId(admin.location_id)
-      fetchLocations()
     }
   }, [open, admin])
-
-  const fetchLocations = async () => {
-    setIsLoadingLocations(true)
-    try {
-      const supabase = createClient()
-      const { data, error } = await supabase
-        .from('locations')
-        .select('*')
-        .order('city', { ascending: true })
-
-      if (error) throw error
-      setLocations(data || [])
-    } catch (error) {
-
-      toast.error('Failed to load locations')
-    } finally {
-      setIsLoadingLocations(false)
-    }
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -133,18 +112,18 @@ export function EditAdminDialog({ admin, open, onOpenChange, onSuccess }: EditAd
 
           <div className="space-y-2">
             <Label htmlFor="edit-location" className="text-white">Brocamp Location</Label>
-            <Select value={locationId} onValueChange={setLocationId} disabled={isLoadingLocations}>
+            <Select value={locationId} onValueChange={setLocationId}>
               <SelectTrigger className="bg-white/5 border-white/10 text-white">
                 <SelectValue placeholder="Select location" />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-white/10">
-                {locations.map((location) => (
+                {BROCAMP_LOCATIONS.map((location) => (
                   <SelectItem
                     key={location.id}
                     value={location.id}
                     className="text-white hover:bg-white/10"
                   >
-                    {location.name}, {location.city}
+                    {location.name}
                   </SelectItem>
                 ))}
               </SelectContent>

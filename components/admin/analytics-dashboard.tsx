@@ -205,12 +205,12 @@ export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDas
 
   // Location-wise distribution with codenames
   const locationCodeMap: Record<string, string> = {
-    'Brocamp Trivandrum': 'TVM',
-    'Brocamp Kochi': 'KOC',
-    'Brocamp Calicut': 'CLT',
-    'Brocamp Bangalore': 'BLR',
-    'Brocamp Thrissur': 'TCR',
-    'Brocamp Kannur': 'KNR',
+    'Kochi (Headquarters)': 'KOC',
+    'Kozhikode (Calicut)': 'KZD',
+    'Trivandrum': 'TVM',
+    'Bengaluru': 'BLR',
+    'Coimbatore': 'CBE',
+    'Chennai': 'CHE',
   }
 
   const locationData = useMemo(() => {
@@ -304,7 +304,7 @@ export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDas
                 </SelectItem>
                 {locations.map((location) => (
                   <SelectItem key={location.id} value={location.id} className="text-white focus:bg-blue-500/20">
-                    {location.name} - {location.city}
+                    {location.name}
                   </SelectItem>
                 ))}
               </SelectContent>
