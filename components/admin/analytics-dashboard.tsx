@@ -441,10 +441,11 @@ export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDas
                     outerRadius={CHART_CONFIG.pieOuterRadius}
                     fill="#8884d8"
                     dataKey="value"
-                    style={{ fontSize: '10px' }}
+                    style={{ fontSize: '10px', outline: 'none' }}
+                    stroke="none"
                   >
                     {statusData.forPie.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
+                      <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
                     ))}
                   </Pie>
                   <Tooltip
@@ -514,7 +515,7 @@ export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDas
                   fill="#3B82F6"
                   name="Complaints"
                   radius={[8, 8, 0, 0]}
-                  activeBar={{ fill: '#3B82F6', filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}
+                  activeBar={{ fill: '#3B82F6', stroke: 'none', filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}
                 />
               </BarChart>
             </ResponsiveContainer>
@@ -561,21 +562,21 @@ export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDas
                   fill="#3B82F6"
                   name="Total"
                   radius={[8, 8, 0, 0]}
-                  activeBar={{ fill: '#3B82F6', filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}
+                  activeBar={{ fill: '#3B82F6', stroke: 'none', filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.8))' }}
                 />
                 <Bar
                   dataKey="resolved"
                   fill="#10B981"
                   name="Resolved"
                   radius={[8, 8, 0, 0]}
-                  activeBar={{ fill: '#10B981', filter: 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.8))' }}
+                  activeBar={{ fill: '#10B981', stroke: 'none', filter: 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.8))' }}
                 />
                 <Bar
                   dataKey="pending"
                   fill="#F59E0B"
                   name="Pending"
                   radius={[8, 8, 0, 0]}
-                  activeBar={{ fill: '#F59E0B', filter: 'drop-shadow(0 0 8px rgba(245, 158, 11, 0.8))' }}
+                  activeBar={{ fill: '#F59E0B', stroke: 'none', filter: 'drop-shadow(0 0 8px rgba(245, 158, 11, 0.8))' }}
                 />
               </BarChart>
             </ResponsiveContainer>
@@ -609,10 +610,11 @@ export function AnalyticsDashboard({ complaints, locations, role }: AnalyticsDas
                     outerRadius={CHART_CONFIG.pieOuterRadius}
                     fill="#8884d8"
                     dataKey="value"
-                    style={{ fontSize: '10px' }}
+                    style={{ fontSize: '10px', outline: 'none' }}
+                    stroke="none"
                   >
                     {priorityData.forPie.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
+                      <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
                     ))}
                   </Pie>
                   <Tooltip

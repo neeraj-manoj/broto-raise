@@ -120,6 +120,32 @@
     @apply bg-background text-foreground;
   }
 
+  /* Remove focus outline from Recharts containers */
+  .recharts-wrapper,
+  .recharts-wrapper svg,
+  .recharts-surface,
+  .recharts-responsive-container,
+  .recharts-responsive-container > div,
+  .recharts-pie,
+  .recharts-pie-sector,
+  .recharts-bar,
+  .recharts-bar-rectangle,
+  .recharts-line,
+  .recharts-legend-wrapper {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .recharts-wrapper:focus,
+  .recharts-wrapper:focus-visible,
+  .recharts-surface:focus,
+  .recharts-surface:focus-visible,
+  .recharts-responsive-container:focus,
+  .recharts-responsive-container:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
   /* Hide scrollbar entirely while maintaining scroll functionality */
   ::-webkit-scrollbar {
     width: 0px;
